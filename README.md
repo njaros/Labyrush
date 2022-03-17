@@ -2,7 +2,7 @@
 
 Ici est mon 1er sujet de rush.
 
-Ce programme génère une carte 2D labirynthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
+Ce programme génère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
 Ce sujet est un pompage complet d'un sujet de codingame.
 
 But du jeu :
