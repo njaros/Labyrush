@@ -6,11 +6,21 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:59:09 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/17 17:44:17 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 17:49:25 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "labyrush.h"
+
+void	free_tabtab(int **to_free)
+{
+	int	i;
+
+	i = -1;
+	while (to_free[++i])
+		free(to_free[i]);
+	free(to_free);
+}
 
 t_list	*ft_lsttake(t_list **alst)
 {
@@ -121,7 +131,8 @@ int	a_star(char **map, int R, int C, int Kx, int Ky, int Tx, int Ty)
 	noeud	*depart;
 	noeud	*current_open;
 
-	heuristiques = malloc(sizeof(int *) * R);
+	heuristiques = malloc(sizeof(int *) * R + 1);
+	heuristiques[R] = NULL;
 	open = NULL;
 	closed = NULL;
 	// creation des heuristiques des noeuds
@@ -187,10 +198,11 @@ int	a_star(char **map, int R, int C, int Kx, int Ky, int Tx, int Ty)
 	}
 	while (closed)
 	{
-		free(open->content);
+		free(closed->content);
 		temp = closed;
 		closed = closed->next;
 		free(temp);
 	}
+	free_tabtab(heuristiques);
 	return (timer);
 }
