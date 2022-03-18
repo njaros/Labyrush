@@ -1,5 +1,13 @@
 # Labyrush
 
+###### EN TRAVAUX ######
+
+aff_vue_perso
+mazer (generateur de labyrinthe)
+keskiladi (traitement sortie du programme joueur)
+
+###### EN TRAVAUX ######
+
 Ici est mon 1er sujet de rush.
 
 Ce programme génère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.

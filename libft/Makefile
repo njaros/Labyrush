@@ -41,7 +41,9 @@ SRCS = 	ft_isalnum.c \
 		ft_lstiter.c \
 		ft_lstsize.c \
 		ft_lstadd_front.c \
-		ft_lstlast.c
+		ft_lstlast.c \
+		get_next_line.c \
+		get_next_line_utils.c
 OBJS = ${SRCS:.c=.o}
 HEADERS_PATH = ../includes
 HEADERS = ../includes/libft.h

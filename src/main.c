@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 12:43:28 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 13:26:01 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,31 @@ int	err(int e, void *to_free)
 
 void	set_pos(t_pos *pers, t_pos *obj, char **maze)
 {
+	int	i;
+	int	j;
+	int	deux;
 
+	deux = 0;
+	j = -1;
+	while (maze[++j] && deux < 2)
+	{
+		i = -1;
+		while (maze[j][++i] && deux < 2)
+		{
+			if (maze[j][i] == 'O')
+			{
+				obj->y = j;
+				obj->x = i;
+				deux++;
+			}
+			if (maze[j][i] == 'E')
+			{
+				pers->y = j;
+				pers->x = i;
+				deux++;
+			}
+		}
+	}
 }
 
 char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
@@ -89,9 +113,9 @@ int	main(int ac, char **av)
 	printf("lg = %d\nht = %d\nperso_x = %d\nperso_y = %d\n", lg, ht, perso.x, perso.y);
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 	printf("compte a rebours une fois B atteint = %d\n", timer);
-	while (timer >= 0 && !victoire && !rip)
+	while (!victoire && !rip)
 	{
-		aff_vue_perso(maze, perso);
+		aff_vue_perso(maze, perso, lg, ht);
 		scanf("%s", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &objectif, &timer, &victoire, &rip);
 	}
