@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 14:13:07 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 15:11:09 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	aff_maze(char **maze)
 
 	i = -1;
 	while (maze[++i])
+	{
 		printf("s\n", maze[i]);
+		free(maze[i]);
+	}
+	free(maze);
 	printf("\n -----------BILAN---------- \n\n");
 }
