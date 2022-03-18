@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:15:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 16:28:29 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 16:34:52 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,11 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, t_pos *obj, int *timer, i
 		printf("%s", random_msg_wall());
 		return (1);
 	}
+	pers->x += dx;
+	pers->y += dy;
+	if (maze[pers->y][pers->x] == 'O' && !decompte)
+		decompte++;
+	if (maze[pers->y][pers->x] == 'E' && decompte)
+		*victoire++;
+	return (1);
 }

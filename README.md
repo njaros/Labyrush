@@ -4,7 +4,8 @@
 
 aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool.
 mazer (generateur de labyrinthe)
-keskiladi (traitement sortie du programme joueur)
+
+Tests a faire.
 
 ###### EN TRAVAUX ######
 
