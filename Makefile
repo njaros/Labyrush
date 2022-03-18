@@ -6,7 +6,7 @@
 #    By: njaros <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 13:47:18 by njaros            #+#    #+#              #
-#    Updated: 2022/03/17 14:14:44 by njaros           ###   ########lyon.fr    #
+#    Updated: 2022/03/18 09:02:15 by njaros           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ LIB = libft/libft.a
 
 ## LES SOURCES, OBJETS et INCLUDES ##
 
-LST_SRCS = main.c
+LST_SRCS =	main.c \
+			a_star.c \
+			mazer.c
 LST_OBJS = ${LST_SRCS:.c=.o}
 LST_INCLUDES = labyrush.h
 SRC = $(addprefix ${PATH_SRCS}/,${LST_SRCS})

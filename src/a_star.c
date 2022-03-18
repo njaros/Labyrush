@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:59:09 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/17 17:49:25 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 09:21:45 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,21 @@ void	check_noeud(int x, int y, t_list *open, t_list *closed, int **heuristiques,
 	}
 }
 
-int	a_star(char **map, int R, int C, int Kx, int Ky, int Tx, int Ty)
+noeud	*search_parent(t_list *closed, int x, int y)
+{
+	noeud	*current;
+
+	while (closed)
+	{
+		current = closed->content;
+		if (current->x == x && current->y == y)
+			return (current->parent);
+		closed = closed->next;
+	}
+	return (NULL);
+}
+
+int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 {
 	int		**heuristiques;
 	int		i = 0;
@@ -129,36 +143,36 @@ int	a_star(char **map, int R, int C, int Kx, int Ky, int Tx, int Ty)
 	t_list	*open;
 	t_list	*closed;
 	noeud	*depart;
-	noeud	*current_open;
+	noeud	*current;
 
-	heuristiques = malloc(sizeof(int *) * R + 1);
-	heuristiques[R] = NULL;
+	heuristiques = malloc(sizeof(int *) * row + 1);
+	heuristiques[row] = NULL;
 	open = NULL;
 	closed = NULL;
 	// creation des heuristiques des noeuds
-	while (j < R)
+	while (j < row)
 	{
-		heuristiques[j] = malloc(sizeof(int) * C);
-		while (i < C)
+		heuristiques[j] = malloc(sizeof(int) * col);
+		while (i < col)
 		{
 			if (map[j][i] == '#' || map[j][i] == '?')
 				heuristiques[j][i] = -1;
 			else
-				heuristiques[j][i] = abs(Tx - i) + abs(Ty - j);
+				heuristiques[j][i] = abs(xb - i) + abs(yb - j);
 			i++;
 		}
 		i = 0;
 		j++;
 	}
 	// heuristiques creees
-	depart = crea_noeud(Kx, Ky, NULL, heuristiques);
+	depart = crea_noeud(xa, ya, NULL, heuristiques);
 	ft_lstadd_back(&open, ft_lstnew(depart));
-	current_open = open->content;
+	current = open->content;
 	//creation open et closed de A*
-	while (open && heuristiques[current_open->y][current_open->x] != 0)
+	while (open && heuristiques[current->y][current->x] != 0)
 	{
-		i = current_open->x;
-		j = current_open->y;
+		i = current->x;
+		j = current->y;
 		// Recherche et creation des noeuds voisins + creation open et correction closed
 		check_noeud(i + 1, j, open, closed, heuristiques, map);
 		check_noeud(i - 1, j, open, closed, heuristiques, map);
@@ -167,23 +181,22 @@ int	a_star(char **map, int R, int C, int Kx, int Ky, int Tx, int Ty)
 		// fin de recherche et creation de noeuds voisins + open et delclosed
 		ft_lstadd_back(&closed, ft_lsttake(&open)); //noeud lu va dans closed
 		if (open)
-			current_open = open->content;
+			current = open->content;
 		//fprintf(stderr, "heuristique nouvel open : %ld\n", heuristiques[open->n->y][open->n->x]);
 	}
-	i = Tx;
-	j = Ty;
+	i = xb;
+	j = yb;
 	ft_lstadd_back(&closed, ft_lsttake(&open));
 	// open et closed creees
 	// Creation du chemin a suivre
-	noeud   *next_node;
-	while (i != Kx || j != Ky)
+	while (i != xa || j != ya)
 	{
-		next_node = search_parent(closed, i, j);
+		current = search_parent(closed, i, j);
 	//    fprintf(stderr, "coord parent trouve : {%d, %d}\n", next_node->x, next_node->y);
 	//	fill_path(path, next_node->x - i, next_node->y - j);
 		timer++;
-		i = next_node->x;
-		j = next_node->y;
+		i = current->x;
+		j = current->y;
 	}
 	fprintf(stderr, "\npathing memorise \n");
 	// chemin a suivre cree
