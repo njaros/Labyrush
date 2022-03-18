@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 09:59:47 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 12:43:28 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,60 @@ int	err(int e, void *to_free)
 	return (e);
 }
 
+void	set_pos(t_pos *pers, t_pos *obj, char **maze)
+{
+
+}
+
+char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
+{
+	char	**maze;
+	char	*line_read = NULL;
+	int		fd;
+	t_list	*lst = NULL;
+	t_list	*secure;
+
+	fd = open(to_open, O_RDONLY);
+	if (!fd)
+	{
+		fprintf(stderr, "entrée incorrecte\n");
+		return (NULL);
+	}
+	lst = NULL;
+	line_read = get_next_line(fd);
+	while (line_read)
+	{
+		secure = ft_lstnew(line_read);
+		if (!secure)
+		{
+			ft_lstclear(&lst, free);
+			fprintf(stderr, "pas assez de memoire pour cette map\n");
+			return (NULL);
+		}
+		ft_lstadd_back(&lst, secure);
+		*ht++;
+		line_read = get_next_line(fd);		
+	}
+	close(fd);
+	if (!lst)
+		return (NULL);
+	fd = -1;
+	*lg = ft_strlen((char *)lst->content);
+	maze = malloc(sizeof(char *) * (*ht + 1));
+	maze[*ht] = NULL;
+	while (maze[++fd])
+		maze[fd] = lst->content;
+	ft_lstclear(lst, NULL);
+	set_pos(pers, obj, maze);
+	return (maze);
+}
+
 int	main(int ac, char **av)
 {
 	t_pos	perso;
 	t_pos	objectif;
-	int		lg;
-	int		ht;
+	int		lg = 0;
+	int		ht = 0;
 	int		timer;
 	int		victoire = 0;
 	int		rip = 0;

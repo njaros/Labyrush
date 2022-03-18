@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 09:17:38 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 10:19:42 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <time.h>
 # include <sys/time.h>
 # include <math.h>
+# include <fcntl.h>
 
 typedef struct s_pos
 {

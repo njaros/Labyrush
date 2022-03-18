@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:59:09 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 09:21:45 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 10:04:34 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 		i = current->x;
 		j = current->y;
 	}
-	fprintf(stderr, "\npathing memorise \n");
+	//fprintf(stderr, "\npathing memorise \n");
 	// chemin a suivre cree
 	// free des noeuds et open closed
 	t_list  *temp;

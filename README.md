@@ -23,6 +23,14 @@ MP crée un labyrinthe avec un point A de départ, un point B d'objectif.
 
 MP retourne avant le tour 1 la largeur et la longueur de la map (permettant a PJ d'allouer ses mémoires), la position de départ du personnage, ainsi que le temps à ne pas dépasser pour ramener B à A.
 
+Concernant les caractères de la carte fourni par MP:
+- '#' est un mur
+- '.' est un sol
+- 'P' est le personnage
+- 'O' est l'objectif
+- 'E' est le point de départ
+- '?' est hors de vue du personnage
+
 ### PROCESSUS ###
 
 A chaque tour :

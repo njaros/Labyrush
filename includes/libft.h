@@ -66,4 +66,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+// GNL
+
+int		contain_return(char *s);
+char	*ft_substr_free(char *s, unsigned int start, size_t len);
+char	*get_next_line(int fd);
+char	*ft_strjoin_free(char *s1, char *s2, int del);
+char	*ft_return_and_keep(char **temp, char *line, int n);
+
 #endif
