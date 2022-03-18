@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 15:11:09 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 16:15:36 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,20 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 void	aff_maze(char **maze)
 {
 	int	i;
+	int	j;
 
-	i = -1;
-	while (maze[++i])
+	j = -1;
+	while (maze[++j])
 	{
-		printf("s\n", maze[i]);
+		i = -1;
+		while (maze[j][++i])
+		{
+			if (maze[j][i] == '%')
+				printf("💥");
+			else
+				printf("%c", maze[j][i]);
+		}
+		printf("\n");
 		free(maze[i]);
 	}
 	free(maze);
