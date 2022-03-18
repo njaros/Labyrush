@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 13:26:01 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:32:54 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	err(int e, void *to_free)
 {
 	if (e == 1)
 		fprintf(stderr, "erreur lors de la récupération ou la création du labyrinthe\n");
+	if (e == 2)
+	{
+		fprintf(stderr, "erreur memoire affichage personnage\n");
+		freeteuse(to_free);
+	}
 	return (e);
 }
 
@@ -75,7 +80,7 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 		}
 		ft_lstadd_back(&lst, secure);
 		*ht++;
-		line_read = get_next_line(fd);		
+		line_read = get_next_line(fd);
 	}
 	close(fd);
 	if (!lst)
@@ -115,14 +120,15 @@ int	main(int ac, char **av)
 	printf("compte a rebours une fois B atteint = %d\n", timer);
 	while (!victoire && !rip)
 	{
-		aff_vue_perso(maze, perso, lg, ht);
+		if (!aff_vue_perso(maze, perso, lg, ht))
+			return (err(2, maze));
 		scanf("%s", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &objectif, &timer, &victoire, &rip);
 	}
 	aff_maze(maze);
 	if (victoire)
-		printf("pas dommage, vous n'avez pas perdu en ni plus ni moins %d coups\n", compteur);
+		printf("pas dommage, vous n'avez pas perdu en ni plus ni moins %d mouvements\n", compteur);
 	if (rip)
-		printf("pas bravo, vous n'avez pas gagné en ni moins ni plus %d coups\n", compteur);
+		printf("pas bravo, vous n'avez pas gagné en ni moins ni plus %d mouvements\n", compteur);
 	return (0);
 }

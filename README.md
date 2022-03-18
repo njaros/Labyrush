@@ -2,7 +2,7 @@
 
 ###### EN TRAVAUX ######
 
-aff_vue_perso
+aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool.
 mazer (generateur de labyrinthe)
 keskiladi (traitement sortie du programme joueur)
 
@@ -37,7 +37,7 @@ Concernant les caractères de la carte fourni par MP:
 - 'P' est le personnage
 - 'O' est l'objectif
 - 'E' est le point de départ
-- '?' est hors de vue du personnage
+- '?' est non visible par le personnage
 
 ### PROCESSUS ###
 
