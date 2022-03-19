@@ -6,7 +6,7 @@
 #    By: njaros <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 13:47:18 by njaros            #+#    #+#              #
-#    Updated: 2022/03/18 09:02:15 by njaros           ###   ########lyon.fr    #
+#    Updated: 2022/03/19 13:47:25 by njaros           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = labyrush
 CC = gcc
-FLAGS = -Werror -Wextra -Wall -D BUFFER_SIZE=30
+FLAGS = -Werror -Wextra -Wall
 
 ## LES CHEMINS ##
 
@@ -30,7 +30,9 @@ LIB = libft/libft.a
 
 LST_SRCS =	main.c \
 			a_star.c \
-			mazer.c
+			mazer.c \
+			keskiladi.c \
+			pied.c
 LST_OBJS = ${LST_SRCS:.c=.o}
 LST_INCLUDES = labyrush.h
 SRC = $(addprefix ${PATH_SRCS}/,${LST_SRCS})

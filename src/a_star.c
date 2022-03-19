@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:59:09 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 10:04:34 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/19 13:59:52 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,40 @@ int	closed_val(t_list *closed, int x, int y)
 		closed = closed->next;
 	}
 	return (-1);
+}
+
+void	ft_lstinsert_croissant(t_list **alst, t_list *new)
+{
+	t_list	*first;
+	t_list	*temp;
+	noeud	*current;
+	noeud	*newn;
+	int		new_val;
+
+	newn = new->content;
+	new_val = newn->val;
+	first = *alst;
+	temp = *alst;
+	*alst = (*alst)->next;
+	if (*alst)
+		current = (*alst)->content;
+	while ((*alst) && current->val < new_val)
+	{
+		temp = *alst;
+		(*alst) = (*alst)->next;
+		current = (*alst)->content;
+	}
+	if (!*alst)
+	{
+		temp->next = new;
+		*alst = first;
+	}
+	else
+	{
+		temp->next = new;
+		new->next = *alst;
+		*alst = first;
+	}
 }
 
 void	check_noeud(int x, int y, t_list *open, t_list *closed, int **heuristiques, char **map)

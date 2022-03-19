@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 14:32:54 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/19 14:06:20 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 			return (NULL);
 		}
 		ft_lstadd_back(&lst, secure);
-		*ht++;
+		*ht += 1;
 		line_read = get_next_line(fd);
 	}
 	close(fd);
@@ -91,7 +91,7 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	maze[*ht] = NULL;
 	while (maze[++fd])
 		maze[fd] = lst->content;
-	ft_lstclear(lst, NULL);
+	ft_lstclear(&lst, NULL);
 	set_pos(pers, obj, maze);
 	return (maze);
 }
@@ -107,7 +107,7 @@ int	main(int ac, char **av)
 	int		rip = 0;
 	int		compteur = 0;
 	char	**maze;
-	char	*lecture;
+	char	*lecture = NULL;
 
 	if (ac == 1)
 		maze = mazer(&lg, &ht, &perso, &objectif);
@@ -123,12 +123,12 @@ int	main(int ac, char **av)
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
 		scanf("%s", lecture);
-		compteur += keskiladi(maze, lecture, &perso, &objectif, &timer, &victoire, &rip);
+		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
 	}
 	aff_maze(maze);
 	if (victoire)
-		printf("pas dommage, vous n'avez pas perdu en ni plus ni moins %d mouvements\n", compteur);
+		printf("--VICTOIRE-- %d mouvements\n", compteur);
 	if (rip)
-		printf("pas bravo, vous n'avez pas gagné en ni moins ni plus %d mouvements\n", compteur);
+		printf("--DEFAITE-- %d mouvements\n", compteur);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 16:15:36 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/19 14:10:25 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 		{
 			if (x == 2 && y == 2)
 				vision[y][x] = 'P';
-			else if (p.x - 2 + x < 0 || p.x - 2 + x)
+			else if (p.x - 2 + x < 0 || p.x - 2 + x > lg)
 				vision[y][x] = '#';
 			else
 				vision[y][x] = maze[p.y - 2 + y][p.x - 2 + x];

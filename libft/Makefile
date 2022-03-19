@@ -50,7 +50,7 @@ HEADERS = ../includes/libft.h
 NAME = libft.a
 RM = rm -f
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=30
 
 %.o: %.c ${HEADERS}
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${HEADERS_PATH}

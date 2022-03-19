@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/18 12:51:18 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/19 14:06:07 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ typedef struct noeud
 // Ptites fonctions utiles
 
 void	free_tabtab(int **to_free);
+void	freeteuse(void *to_free);
+void	aff_maze(char **maze);
 
-// 
+// Fonctions moins petites
 
+int		aff_vue_perso(char **maze, t_pos p, int lg, int ht);
+int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip);
 int		a_star(char **map, int row, int col, int xa, int ya, int xb, int yb);
 char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif);
 
