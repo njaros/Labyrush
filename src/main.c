@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 14:06:20 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/19 14:50:18 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,18 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	*lg = ft_strlen((char *)lst->content);
 	maze = malloc(sizeof(char *) * (*ht + 1));
 	maze[*ht] = NULL;
-	while (maze[++fd])
-		maze[fd] = lst->content;
-	ft_lstclear(&lst, NULL);
+	secure = lst;
+	while (lst)
+	{
+		maze[++fd] = lst->content;
+		lst = lst->next;
+	}
+	while (secure)
+	{
+		lst = secure->next;
+		free(secure);
+		secure = lst;
+	}
 	set_pos(pers, obj, maze);
 	return (maze);
 }
