@@ -1,9 +1,20 @@
 # Labyrush
 
+### MODE D EMPLOI ATM###
+
+1/ make
+2.1/ ./labyrush laby/laby1 ou une autre map que vous pouvez creer.
+2.2/ executer labyrush sans argument lance une map generee aleatoirement (non implemente pour le moment).
+3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
+
+
 ###### EN TRAVAUX ######
 
-aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool.
-mazer (generateur de labyrinthe)
+- aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool.
+
+- implementer un temps max pour l attente de stdin.
+
+- mazer a faire (generateur de labyrinthe).
 
 Tests a faire.
 
@@ -44,7 +55,7 @@ Concernant les caractères de la carte fourni par MP:
 
 A chaque tour :
 - MP retourne la vision actuelle du personnage (2 cases autour).
-- PJ doit retourner "HAUT\n" "BAS\n" "GAUCHE\n" ou "DROITE\n".
+- PJ doit retourner "HAUT" "BAS" "GAUCHE" ou "DROITE".
 
 Fin du jeu si :
 - PJ écrit autre chose
