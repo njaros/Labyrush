@@ -1,11 +1,14 @@
 # Labyrush
 
-### MODE D EMPLOI ATM###
+### MODE D EMPLOI ATM ###
 
-1/ make
-2.1/ ./labyrush laby/laby1 ou une autre map que vous pouvez creer.
-2.2/ executer labyrush sans argument lance une map generee aleatoirement (non implemente pour le moment).
-3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
+- 1/ make
+
+- 2.1/ ./labyrush laby/laby1 ou une autre map que vous pouvez creer.
+
+- 2.2/ executer labyrush sans argument lance une map generee aleatoirement (non implemente pour le moment).
+
+- 3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
 
 
 ###### EN TRAVAUX ######
