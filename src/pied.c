@@ -53,7 +53,7 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 		{
 			if (x == 2 && y == 2)
 				vision[y][x] = 'P';
-			else if (p.x - 2 + x < 0 || p.x - 2 + x >= lg - 1)
+			else if (p.x - 2 + x < 0 || p.x - 2 + x >= lg)
 				vision[y][x] = '#';
 			else
 				vision[y][x] = maze[p.y - 2 + y][p.x - 2 + x];

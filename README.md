@@ -13,15 +13,17 @@
 
 ###### EN TRAVAUX ######
 
-- aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool.
+- aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool. Mais est-ce si grave ?
 
 - implementer un temps max pour l attente de stdin.
 
+- Decider d'un compteur max total de mouvement.
+
 - mazer a faire (generateur de labyrinthe).
 
-- Valgrind râle un peu sur le a_star.
+- Valgrind râle un peu sur le a_star. Je ne sais pas encore pourquoi.
 
-Tests a faire.
+- Tests a faire.
 
 ###### INTRODUCTION ######
 

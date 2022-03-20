@@ -86,7 +86,20 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	if (!lst)
 		return (NULL);
 	fd = -1;
-	*lg = ft_strlen((char *)lst->content);
+	//deboggage chelou
+	char *pouet;
+	pouet = lst->content;
+	/*int k = -1;
+	while (pouet[++k])
+	{
+		fprintf(stderr, "%d ", (int) pouet[k]);
+	}
+	fprintf(stderr, "\n");*/
+	//fin degoggage
+	*lg = ft_strlen(pouet) - 1;
+	fprintf(stderr, "%d\n", (int)pouet[*lg - 1]);
+	if (pouet[*lg - 1] == 13)
+		*lg -= 1;
 	maze = malloc(sizeof(char *) * (*ht + 1));
 	maze[*ht] = NULL;
 	secure = lst;
@@ -137,10 +150,10 @@ int	main(int ac, char **av)
 	}
 	aff_maze(maze);
 	if (victoire == 1)
-		printf("--VICTOIRE--\n\n score : %d mouvements\n", compteur);
+		printf("--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 	if (victoire == 2)
-		printf("--VICTOIRE--\n\n score : 0 mouvement\n");
+		printf("--VICTOIRE--\n\n score : 0 mouvement\n\n");
 	if (rip)
-		printf("--DEFAITE-- \n\n %d mouvements\n", compteur);
+		printf("--DEFAITE-- \n\n %d mouvements\n\n", compteur);
 	return (0);
 }
