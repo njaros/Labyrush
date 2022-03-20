@@ -36,13 +36,13 @@ Ce programme crée ou récupère un labyrinthe avec un point E de départ, un po
 
 ### BUT DU JEU ###
 
-- Un personnage dans un labyrinthe commence à un point A.
-- Le personnage doit parcourir un labyrinthe inconnu dans le but de trouver l'objectif B.
-- Une fois l'objectif B trouvé, le personnage doit au plus vite le ramener à A (son point de départ), il meurt s'il ne trouve pas le meilleur chemin.
+- Un personnage dans un labyrinthe commence à un point E.
+- Le personnage doit parcourir un labyrinthe inconnu dans le but de trouver l'objectif O.
+- Une fois l'objectif O trouvé, le personnage doit au plus vite le ramener à E (son point de départ), il meurt s'il ne le ramene pas assez vite.
 
 ### INITIALISATION ###
 
-MP retourne avant le tour 1 la largeur et la longueur de la map (permettant a PJ d'allouer ses mémoires), la position de départ du personnage, ainsi que le temps à ne pas dépasser pour ramener B à A.
+MP retourne avant le tour 1 la largeur et la longueur de la map (permettant a PJ d'allouer ses mémoires), la position de départ du personnage, ainsi que le temps à ne pas dépasser pour ramener O à E.
 
 Concernant les caractères de la carte fourni par MP:
 - '#' est un mur
@@ -66,7 +66,7 @@ Fin du jeu si :
 - PJ écrit autre chose
 - PJ fait foncer le personnage dans un mur
 - PJ met trop de temps à répondre
-- PJ ne ramène pas B dans les temps
+- PJ ne ramène pas O dans les temps
 - PJ gagne
 
 ### SCORE ###
