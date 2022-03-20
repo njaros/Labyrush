@@ -116,7 +116,7 @@ int	main(int ac, char **av)
 	int		rip = 0;
 	int		compteur = 0;
 	char	**maze;
-	char	*lecture = NULL;
+	char	lecture[50];
 
 	if (ac == 1)
 		maze = mazer(&lg, &ht, &perso, &objectif);
@@ -124,6 +124,7 @@ int	main(int ac, char **av)
 		maze = recup_map(av[1], &lg, &ht, &perso, &objectif);
 	if (!maze)
 		return (err(1, NULL));
+	lecture[50] = '\0';
 	printf("lg = %d\nht = %d\nperso_x = %d\nperso_y = %d\n", lg, ht, perso.x, perso.y);
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 	printf("compte a rebours une fois B atteint = %d\n", timer);
@@ -131,13 +132,15 @@ int	main(int ac, char **av)
 	{
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
-		scanf("%s", lecture);
+		scanf("%49s", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
 	}
 	aff_maze(maze);
-	if (victoire)
-		printf("--VICTOIRE-- %d mouvements\n", compteur);
+	if (victoire == 1)
+		printf("--VICTOIRE--\n\n score : %d mouvements\n", compteur);
+	if (victoire == 2)
+		printf("--VICTOIRE--\n\n score : 0 mouvement\n");
 	if (rip)
-		printf("--DEFAITE-- %d mouvements\n", compteur);
+		printf("--DEFAITE-- \n\n %d mouvements\n", compteur);
 	return (0);
 }

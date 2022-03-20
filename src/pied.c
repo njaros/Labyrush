@@ -41,18 +41,19 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 			return (0);
 		}
 		vision[y][5] = '\0';
+		y++;
 	}
 	y = 0;
 	while (y < 5)
 	{
 		x = 0;
-		if (p.y - 2 + y < 0 || p.y - 2 + y > ht)
+		if (p.y - 2 + y < 0 || p.y - 2 + y >= ht)
 			ft_strcpy(vision[y], "#####");
-		while (x < 5 && (p.y - 2 + y >= 0) && (p.y - 2 + y <= ht))
+		while (x < 5 && (p.y - 2 + y >= 0) && (p.y - 2 + y < ht))
 		{
 			if (x == 2 && y == 2)
 				vision[y][x] = 'P';
-			else if (p.x - 2 + x < 0 || p.x - 2 + x > lg)
+			else if (p.x - 2 + x < 0 || p.x - 2 + x >= lg - 1)
 				vision[y][x] = '#';
 			else
 				vision[y][x] = maze[p.y - 2 + y][p.x - 2 + x];
@@ -75,6 +76,7 @@ void	aff_maze(char **maze)
 	int	i;
 	int	j;
 
+	printf("\n");
 	j = -1;
 	while (maze[++j])
 	{
@@ -86,9 +88,8 @@ void	aff_maze(char **maze)
 			else
 				printf("%c", maze[j][i]);
 		}
-		printf("\n");
-		free(maze[i]);
+		free(maze[j]);
 	}
 	free(maze);
-	printf("\n -----------BILAN---------- \n\n");
+	printf("\n\n -----------BILAN---------- \n\n");
 }
