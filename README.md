@@ -21,20 +21,14 @@
 
 Tests a faire.
 
-###### EN TRAVAUX ######
+###### INTRODUCTION ######
 
 Ici est mon 1er sujet de rush.
 
 Ce programme génère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
-Ce sujet est un pompage complet d'un sujet de codingame.
+Ce sujet est un pompage quasi complet d'un sujet de codingame.
 
-But du jeu :
-
-MP = mon programme
-
-PJ = progamme du joueur
-
-MP crée un labyrinthe avec un point A de départ, un point B d'objectif.
+Ce programme crée ou récupère un labyrinthe avec un point E de départ, un point O d'objectif.
 
 ### BUT DU JEU ###
 
@@ -55,6 +49,10 @@ Concernant les caractères de la carte fourni par MP:
 - '?' est non visible par le personnage
 
 ### PROCESSUS ###
+
+MP = mon programme
+
+PJ = progamme du joueur
 
 A chaque tour :
 - MP retourne la vision actuelle du personnage (2 cases autour).
