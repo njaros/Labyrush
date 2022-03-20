@@ -76,4 +76,3 @@ MP compte chaque instruction de PJ, permettant de comparer les algo entre eux.
 ### INTERET DE LA SIMULATION ###
 
 Le joueur devra coder un algorithme de découverte de carte ainsi qu'un algorithme de plus court chemin "pathfinding".
-
