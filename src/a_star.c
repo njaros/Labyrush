@@ -117,7 +117,8 @@ void	ft_lstinsert_croissant(t_list **alst, t_list *new)
 	{
 		temp = *alst;
 		(*alst) = (*alst)->next;
-		current = (*alst)->content;
+		if (*alst)
+			current = (*alst)->content;
 	}
 	if (!*alst)
 	{
@@ -139,6 +140,7 @@ void	check_noeud(int x, int y, t_list *open, t_list *closed, int **heuristiques,
 	noeud	*current;
 
 	current = open->content;
+	//fprintf(stderr, "x = %d, y = %d, cx = %d, cy = %d | map[y][x] = %c", x, y, current->x, current->y, map[y][x]);
 	if (map[y][x] != '#' && map[y][x] != '?')
 	{
 		val_closed = closed_val(closed, x, y);
@@ -198,7 +200,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 		i = 0;
 		j++;
 	}
-	// heuristiques creees
+	fprintf(stderr, "heuristiques creees\n");
 	depart = crea_noeud(xa, ya, NULL, heuristiques);
 	ft_lstadd_back(&open, ft_lstnew(depart));
 	current = open->content;
@@ -218,6 +220,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 			current = open->content;
 		//fprintf(stderr, "heuristique nouvel open : %ld\n", heuristiques[open->n->y][open->n->x]);
 	}
+	fprintf(stderr, "listes faites\n");
 	i = xb;
 	j = yb;
 	ft_lstadd_back(&closed, ft_lsttake(&open));

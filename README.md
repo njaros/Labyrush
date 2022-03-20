@@ -19,6 +19,8 @@
 
 - mazer a faire (generateur de labyrinthe).
 
+- Valgrind râle un peu sur le a_star.
+
 Tests a faire.
 
 ###### INTRODUCTION ######
