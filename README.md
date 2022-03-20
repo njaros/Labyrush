@@ -56,7 +56,7 @@ PJ = progamme du joueur
 
 A chaque tour :
 - MP retourne la vision actuelle du personnage (2 cases autour).
-- PJ doit retourner "HAUT" "BAS" "GAUCHE" ou "DROITE".
+- PJ doit retourner "HAUT\n" "BAS\n" "GAUCHE\n" ou "DROITE\n".
 
 Fin du jeu si :
 - PJ écrit autre chose
