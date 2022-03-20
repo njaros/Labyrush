@@ -17,11 +17,11 @@ char	*random_msg_cmd(char *str)
 	struct timeval	t1;
 	int				rand;
 
-	if (ft_strncmp(str, "Coucou\n", 8) == 0)
+	if (ft_strncmp(str, "Coucou", 6) == 0)
 		return ("euh... coucou ? :D\n");
-	if (ft_strncmp(str, "Ca va?\n", 8) == 0)
+	if (ft_strncmp(str, "Ca va?", 6) == 0)
 		return ("Ouiiiiiii ! Et toaaaaaa ?? <3\n");
-	if (ft_strncmp(str, "Fait un truc\n", 14) == 0)
+	if (ft_strncmp(str, "Fait un truc", 13) == 0)
 		return ("Hello World\n");
 	gettimeofday(&t1, NULL);
 	rand = t1.tv_usec % 5;
@@ -92,7 +92,7 @@ int	bonne_commande(char *str)
 		return (3);
 	if (ft_strncmp(str, "HAUT", 4) == 0)
 		return (4);
-	if (ft_strncmp(str, "Je suis Chuck Norris", 21) == 0)
+	if (ft_strncmp(str, "Je suis Chuck Norris", 20) == 0)
 		return (5);
 	return (0);
 }

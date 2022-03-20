@@ -132,7 +132,7 @@ int	main(int ac, char **av)
 	{
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
-		scanf("%49s", lecture);
+		fgets(lecture, 49, stdin);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
 	}
 	aff_maze(maze);
