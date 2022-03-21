@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/21 12:05:51 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 15:33:56 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct noeud
 
 void	free_tabtab(int **to_free);
 void	freeteuse(void *to_free);
+void	gordon_freeman(void *class);
 void	aff_maze(char **maze);
 
 // Fonctions moins petites

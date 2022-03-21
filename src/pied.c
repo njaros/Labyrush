@@ -6,11 +6,20 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/21 13:38:31 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 15:34:07 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "labyrush.h"
+
+void	gordon_freeman(void *class)
+{
+	t_class	*pouet;
+
+	pouet = class;
+	ft_lstclear(&pouet->elem, NULL);
+	free(class);
+}
 
 void	freeteuse(void *to_free)
 {

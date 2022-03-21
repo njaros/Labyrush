@@ -32,6 +32,7 @@ SRCS = 	ft_isalnum.c \
 		ft_strdup.c \
 		ft_strlcpy.c \
 		ft_strnstr.c \
+		ft_switch.c \
 		ft_tolower.c \
 		ft_lstclear.c \
 		ft_lstmap.c \
