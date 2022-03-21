@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/21 11:34:16 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 13:24:58 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	int		fd;
 	t_list	*lst = NULL;
 	t_list	*secure;
+	char	*retour_chariot_windows_check;
 
 	fd = open(to_open, O_RDONLY);
 	if (!fd)
@@ -86,19 +87,9 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	if (!lst)
 		return (NULL);
 	fd = -1;
-	//deboggage chelou
-	char *pouet;
-	pouet = lst->content;
-	/*int k = -1;
-	while (pouet[++k])
-	{
-		fprintf(stderr, "%d ", (int) pouet[k]);
-	}
-	fprintf(stderr, "\n");*/
-	//fin degoggage
-	*lg = ft_strlen(pouet) - 1;
-	fprintf(stderr, "%d\n", (int)pouet[*lg - 1]);
-	if (pouet[*lg - 1] == 13)
+	retour_chariot_windows_check = lst->content;
+	*lg = ft_strlen(retour_chariot_windows_check) - 1;
+	if (retour_chariot_windows_check[*lg - 1] == 13)
 		*lg -= 1;
 	maze = malloc(sizeof(char *) * (*ht + 1));
 	maze[*ht] = NULL;
@@ -148,12 +139,13 @@ int	main(int ac, char **av)
 		fgets(lecture, 48, stdin);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
 	}
+	printf("\n\n -----------BILAN---------- \n\n");
 	aff_maze(maze);
 	if (victoire == 1)
-		printf("--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
+		printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 	if (victoire == 2)
-		printf("--VICTOIRE--\n\n score : 0 mouvement\n\n");
+		printf("\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
 	if (rip)
-		printf("--DEFAITE-- \n\n %d mouvements\n\n", compteur);
+		printf("\n\n--DEFAITE-- \n\n %d mouvements\n\n", compteur);
 	return (0);
 }

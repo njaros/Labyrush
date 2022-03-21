@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 14:10:25 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 13:38:31 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 	int		y;
 
 	y = 0;
-	vision = malloc(sizeof(char *) * 5);
+	vision = malloc(sizeof(char *) * 6);
+	vision[5] = NULL;
 	while (y < 5)
 	{
 		vision[y] = malloc(6);
@@ -85,11 +86,20 @@ void	aff_maze(char **maze)
 		{
 			if (maze[j][i] == '%')
 				printf("💥");
+			else if (maze[j][i] == '#')
+				printf("🏰");
+			else if (maze[j][i] == 'O')
+				printf("🥧");
+			else if (maze[j][i] == 'E')
+				printf("🍽 ");
+			else if (maze[j][i] == '.')
+				printf("🔲");
+			else if (maze[j][i] == 'P')
+				printf("🚙");
 			else
 				printf("%c", maze[j][i]);
 		}
 		free(maze[j]);
 	}
 	free(maze);
-	printf("\n\n -----------BILAN---------- \n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 14:06:07 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 12:05:51 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,29 @@
 # include <math.h>
 # include <fcntl.h>
 
+// La structure ci-dessous aide un peu à la lisibilité du programme
+
 typedef struct s_pos
 {
 	int	x;
 	int	y;
 }	t_pos;
+
+// Les structure ci-dessous est celle utilisé pour l'algorithme union_find
+
+typedef struct s_elem
+{
+	int	x;
+	int	y;
+}	t_elem;
+
+typedef struct s_class
+{
+	int		num;
+	t_list	*elem;
+}	t_class;
+
+// La structre ci-dessous est celle utilisé pour l'algorithme a*
 
 typedef struct noeud
 {

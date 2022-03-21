@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:15:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 14:06:35 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 11:45:35 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	*random_msg_wall(void)
 
 int	bonne_commande(char *str)
 {
-	fprintf(stderr, "commande lue : %s\n", str);
 	if (ft_strncmp(str, "DROITE", 6) == 0)
 		return (1);
 	if (ft_strncmp(str, "BAS", 3) == 0)

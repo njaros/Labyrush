@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:59:09 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 13:59:52 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 11:41:09 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	closeddelete(t_list **closed, int x, int y)
 	t_list	*temp;
 	noeud	*current;
 
-	fprintf(stderr, "\ndel en cours \n");
+	//fprintf(stderr, "\ndel en cours \n");
 	temp = NULL;
 	first = *closed;
 	current = (*closed)->content;
@@ -200,7 +200,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 		i = 0;
 		j++;
 	}
-	fprintf(stderr, "heuristiques creees\n");
+	//fprintf(stderr, "heuristiques creees\n");
 	depart = crea_noeud(xa, ya, NULL, heuristiques);
 	ft_lstadd_back(&open, ft_lstnew(depart));
 	current = open->content;
@@ -220,7 +220,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 			current = open->content;
 		//fprintf(stderr, "heuristique nouvel open : %ld\n", heuristiques[open->n->y][open->n->x]);
 	}
-	fprintf(stderr, "listes faites\n");
+	//fprintf(stderr, "listes faites\n");
 	i = xb;
 	j = yb;
 	ft_lstadd_back(&closed, ft_lsttake(&open));
