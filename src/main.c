@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/19 14:50:18 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 11:34:16 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	main(int ac, char **av)
 		maze = recup_map(av[1], &lg, &ht, &perso, &objectif);
 	if (!maze)
 		return (err(1, NULL));
-	lecture[50] = '\0';
+	lecture[49] = '\0';
 	printf("lg = %d\nht = %d\nperso_x = %d\nperso_y = %d\n", lg, ht, perso.x, perso.y);
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 	printf("compte a rebours une fois B atteint = %d\n", timer);
@@ -145,7 +145,7 @@ int	main(int ac, char **av)
 	{
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
-		fgets(lecture, 49, stdin);
+		fgets(lecture, 48, stdin);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
 	}
 	aff_maze(maze);
