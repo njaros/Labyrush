@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 16:10:13 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 16:32:16 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,11 +376,6 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	}
 	maze[perso->y][perso->x] = 'E';
 	maze[objectif->y][objectif->x] = 'O';
-	/*while (lst_class)
-	{
-		aff_class((t_class *)lst_class->content);
-		lst_class = lst_class->next;
-	}
-	fprintf(stderr, "%d\n", find(first, 5, 5));*/
+	ft_lstclear(&lst_class, gordon_freeman);
 	return (maze);
 }

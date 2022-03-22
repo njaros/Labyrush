@@ -19,9 +19,9 @@
 
 - Decider d'un compteur max total de mouvement.
 
-- mazer a faire (generateur de labyrinthe).
+- réparer le mazer(je pense que le fautif est la fonction unir) puis free la foret.
 
-- Valgrind râle un peu sur le a_star. Je ne sais pas encore pourquoi.
+- Essayer de faire en sorte que fsanatize soit heureux.
 
 - Tests a faire.
 
