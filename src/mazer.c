@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 15:16:47 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 16:10:13 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
 		unir(uni, &tmp, prev);
 	}
-	else if (maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 10))
+	else if (maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 7))
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
 	bal->x += dx;
 	bal->y += dy;
@@ -365,7 +365,8 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	baladeur_o = *objectif;
 	//fprintf(stderr, "perso est dans %d, obj est dans %d\n", find(lst_class, perso->x, perso->y), find(lst_class, objectif->x, objectif->y));
 	first = lst_class;
-	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y))
+	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
+			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y))
 	{
 		seed = rand_moove(&baladeur_rand, seed, lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_p, seed, lst_class, maze, *ht, *lg);
@@ -381,5 +382,5 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 		lst_class = lst_class->next;
 	}
 	fprintf(stderr, "%d\n", find(first, 5, 5));*/
-	return (NULL);
+	return (maze);
 }
