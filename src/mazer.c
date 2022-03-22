@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 13:44:17 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 13:48:51 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	reset_seed(void)
 {
 	struct timeval	t1;
-	int				seed;
 
 	gettimeofday(&t1, NULL);
 	return (t1.tv_usec);
@@ -237,10 +236,11 @@ int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
 {
 	int		range;
 	int		rand;
-	int		index = 4;
-	int		bas = 0;
+	//int		index = 4;
 	char	dir = 0;
 
+	(void)class;
+	(void)maze;
 	range = 0;
 	if (bal->x + 2 < lg - 1 && ++range)
 		dir |= 1; //0001
@@ -255,7 +255,7 @@ int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
 	rand = seed % range + 1;
 	while (--rand)
 	{
-		if (dir >> rand & 1 == 1)
+		if (((dir >> rand) & 1) == 1)
 		{}
 	}
 	return (seed / range);
