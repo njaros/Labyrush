@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/21 15:34:07 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 15:14:53 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	aff_maze(char **maze)
 			else
 				printf("%c", maze[j][i]);
 		}
-		free(maze[j]);
+		//free(maze[j]);
 	}
-	free(maze);
+	//free(maze);
 }

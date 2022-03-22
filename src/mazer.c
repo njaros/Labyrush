@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 13:48:51 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 15:16:47 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,16 +232,82 @@ void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *rand)
 	}
 }
 
+t_class	*search_class(int n, t_list *class)
+{
+	t_class	*current;
+
+	while (class)
+	{
+		current = class->content;
+		if (current->num == n)
+			return (current);
+		class = class->next;
+	}
+	return (NULL);
+}
+
+t_list	*search_lst(int n, t_list *class)
+{
+	t_class	*current;
+
+	while (class)
+	{
+		current = class->content;
+		if (current->num == n)
+			return (class);
+		class = class->next;
+	}
+	return (NULL);	
+}
+
+t_list	*search_prev(t_list *lst, t_list *class)
+{
+	if (class == lst)
+		return (NULL);
+	while (class)
+	{
+		if (class->next == lst)
+			return (class);
+		class = class->next;
+	}
+	return (NULL);
+}
+
+void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
+{
+	int		a;
+	int		b;
+	int		seed;
+	t_class	*uni;
+	t_list	*tmp;
+	t_list	*prev;
+
+	seed = reset_seed();
+	a = find(class, bal->x, bal->y);
+	b = find(class, bal->x + dx, bal->y + dy);
+	if (a != b)
+	{
+		uni = search_class(a, class);
+		tmp = search_lst(b, class);
+		prev = search_prev(tmp, class);
+		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
+		unir(uni, &tmp, prev);
+	}
+	else if (maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 10))
+		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
+	bal->x += dx;
+	bal->y += dy;
+}
+
 int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
 {
-	int		range;
+	int		range = 0;
 	int		rand;
-	//int		index = 4;
+	int		index = -1;
 	char	dir = 0;
 
 	(void)class;
 	(void)maze;
-	range = 0;
 	if (bal->x + 2 < lg - 1 && ++range)
 		dir |= 1; //0001
 	if (bal->y + 2 < ht - 1 && ++range)
@@ -253,11 +319,19 @@ int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
 	if (seed / range == 0)
 		seed = reset_seed();
 	rand = seed % range + 1;
-	while (--rand)
+	while (++index < 4)
 	{
-		if (((dir >> rand) & 1) == 1)
-		{}
+		if (dir & (1 << index) && --rand != 0)
+			dir -= (1 << index);
 	}
+	if (dir == 1)
+		moove(bal, maze, 2, 0, class);
+	if (dir == 2)
+		moove(bal, maze, 0, 2, class);
+	if (dir == 4)
+		moove(bal, maze, -2, 0, class);
+	if (dir == 8)
+		moove(bal, maze, 0, -2, class);
 	return (seed / range);
 }
 
@@ -296,6 +370,8 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 		seed = rand_moove(&baladeur_rand, seed, lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_p, seed, lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_o, seed, lst_class, maze, *ht, *lg);
+		usleep(100000);
+		aff_maze(maze);
 	}
 	maze[perso->y][perso->x] = 'E';
 	maze[objectif->y][objectif->x] = 'O';
