@@ -6,18 +6,23 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 15:14:53 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:11:04 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "labyrush.h"
+
+void	do_nothing(void *rien)
+{
+	(void) rien;
+}
 
 void	gordon_freeman(void *class)
 {
 	t_class	*pouet;
 
 	pouet = class;
-	ft_lstclear(&pouet->elem, NULL);
+	ft_lstclear(&pouet->elem, do_nothing);
 	free(class);
 }
 
@@ -81,6 +86,17 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 	return (1);
 }
 
+void	aff_maze_debug(char **maze)
+{
+	int	j;
+
+	fprintf(stderr, "\n");
+	j = -1;
+	while (maze[++j])
+		fprintf(stderr, "%s", maze[j]);
+	fprintf(stderr, "\n");
+}
+
 void	aff_maze(char **maze)
 {
 	int	i;
@@ -108,7 +124,7 @@ void	aff_maze(char **maze)
 			else
 				printf("%c", maze[j][i]);
 		}
-		//free(maze[j]);
+		free(maze[j]);
 	}
-	//free(maze);
+	free(maze);
 }

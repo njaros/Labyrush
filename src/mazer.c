@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/22 16:32:16 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:21:30 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,40 @@ void	clean_lst(t_list *lst)
 	}
 }
 
-void	unir(t_class *a, t_list **b, t_list *prev_b)
+void	aff_lst_nbr(t_list *lst)
+{
+	t_class *current;
+	t_elem	*e;
+
+	current = lst->content;
+	e = current->elem->content;
+	fprintf(stderr,"aff_________ %d | %d\n", e->x, e->y);
+}
+
+void	unir(t_class *a, t_list *b, t_list **first)
 {
 	t_class	*b_class;
-	t_list	*a_lst;
-	t_list	*b_lst;
+	t_list	*temp;
 
-	b_class = (*b)->content;
-	a_lst = a->elem;
-	b_lst = b_class->elem;
-	ft_lstadd_back(&a_lst, b_lst);
-	free((*b)->content);
-	if (!prev_b)
+	temp = *first;
+	b_class = b->content;
+	ft_lstadd_back(&a->elem, b_class->elem);
+	if (b == *first)
 	{
-		b_lst = (*b)->next;
-		free(*b);
-		*b = b_lst;
+		//aff_lst_nbr(*first);
+		*first = (*first)->next;
+		//aff_lst_nbr(*first);
+		free(b_class);
+		free(b);
 	}
 	else
 	{
-		prev_b->next = (*b)->next;
-		free(*b);
+		while ((*first)->next != b)
+			*first = (*first)->next;
+		(*first)->next = b->next;
+		free(b_class);
+		free(b);
+		*first = temp;
 	}
 }
 
@@ -81,19 +94,27 @@ int	find(t_list *class_lst, int x, int y)
 	t_list	*ptr;
 	t_elem	*e;
 
+	//fprintf(stderr, "%d, %d\n", x, y);
 	while (class_lst)
 	{
+		//fprintf(stderr, "check class content\n");
 		current = class_lst->content;
+		//fprintf(stderr, "check elem\n");
 		ptr = current->elem;
 		while (ptr)
 		{
+			//fprintf(stderr, "check elem content\n");
 			e = ptr->content;
 			if (x == e->x && y == e->y)
 				return (current->num);
+			//fprintf(stderr, "end check elem content\n");
+			//fprintf(stderr, "end check elem\n");
+			//fprintf(stderr, "check next elem\n");
 			ptr = ptr->next;
 		}
 		class_lst = class_lst->next;
 	}
+	//fprintf(stderr, "end %d, %d\n", x, y);
 	return (0);
 }
 
@@ -139,7 +160,7 @@ char	**mazer_init(int lg, int ht, t_list **lst)
 	t_list	*secure_lst;
 
 	i = 0;
-	fprintf(stderr, "%d | %d\n", lg, ht);
+	//fprintf(stderr, "%d | %d\n", lg, ht);
 	maze = malloc(sizeof(char *) * ht + 1);
 	maze[ht] = NULL;
 	if (!maze)
@@ -260,19 +281,6 @@ t_list	*search_lst(int n, t_list *class)
 	return (NULL);	
 }
 
-t_list	*search_prev(t_list *lst, t_list *class)
-{
-	if (class == lst)
-		return (NULL);
-	while (class)
-	{
-		if (class->next == lst)
-			return (class);
-		class = class->next;
-	}
-	return (NULL);
-}
-
 void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
 {
 	int		a;
@@ -280,23 +288,26 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
 	int		seed;
 	t_class	*uni;
 	t_list	*tmp;
-	t_list	*prev;
 
 	seed = reset_seed();
 	a = find(class, bal->x, bal->y);
 	b = find(class, bal->x + dx, bal->y + dy);
-	if (a != b)
+	if (!a || !b)
+		fprintf(stderr, "\n!!!!!!_____!!!!!!_____!!!!!_____!!!\n");
+	if (a && b && a != b)
 	{
 		uni = search_class(a, class);
 		tmp = search_lst(b, class);
-		prev = search_prev(tmp, class);
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
-		unir(uni, &tmp, prev);
+		unir(uni, tmp, &class);
 	}
-	else if (maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 7))
+	else if (a && b && maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 7))
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
-	bal->x += dx;
-	bal->y += dy;
+	if (a && b)
+	{
+		bal->x += dx;
+		bal->y += dy;
+	}
 }
 
 int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
@@ -306,8 +317,6 @@ int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
 	int		index = -1;
 	char	dir = 0;
 
-	(void)class;
-	(void)maze;
 	if (bal->x + 2 < lg - 1 && ++range)
 		dir |= 1; //0001
 	if (bal->y + 2 < ht - 1 && ++range)
@@ -363,7 +372,6 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	set_random(perso, objectif, *lg, *ht, &baladeur_rand);
 	baladeur_p = *perso;
 	baladeur_o = *objectif;
-	//fprintf(stderr, "perso est dans %d, obj est dans %d\n", find(lst_class, perso->x, perso->y), find(lst_class, objectif->x, objectif->y));
 	first = lst_class;
 	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
 			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y))
@@ -371,11 +379,12 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 		seed = rand_moove(&baladeur_rand, seed, lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_p, seed, lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_o, seed, lst_class, maze, *ht, *lg);
-		usleep(100000);
-		aff_maze(maze);
+		//usleep(100000);
+		//aff_maze_debug(maze);
 	}
 	maze[perso->y][perso->x] = 'E';
 	maze[objectif->y][objectif->x] = 'O';
+	//aff_maze_debug(maze);
 	ft_lstclear(&lst_class, gordon_freeman);
 	return (maze);
 }
