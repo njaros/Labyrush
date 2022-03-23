@@ -6,7 +6,7 @@
 #    By: njaros <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 13:47:18 by njaros            #+#    #+#              #
-#    Updated: 2022/03/22 16:30:02 by njaros           ###   ########lyon.fr    #
+#    Updated: 2022/03/23 15:19:13 by njaros           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,11 @@ LST_SRCS =	main.c \
 			keskiladi.c \
 			pied.c
 LST_OBJS = ${LST_SRCS:.c=.o}
-LST_INCLUDES = labyrush.h
-SRC = $(addprefix ${PATH_SRCS}/,${LST_SRCS})
-OBJS = $(addprefix ${PATH_OBJS}/,${LST_OBJS})
-INCLUDES = $(addprefix ${PATH_INCLUDES}/,${LST_INCLUDES})
+LST_INCLUDES =	labyrush.h \
+				libft.h
+SRC =		$(addprefix ${PATH_SRCS}/,${LST_SRCS})
+OBJS =		$(addprefix ${PATH_OBJS}/,${LST_OBJS})
+INCLUDES =	$(addprefix ${PATH_INCLUDES}/,${LST_INCLUDES})
 
 ## LES REGLES DE COMPILATION DU PROGRAMME ##
 
@@ -54,7 +55,7 @@ ${PATH_OBJS}:
 
 ## LES REGLES DE COMPILATION DES LIBRAIRIES ##
 
-${LIB}:				
+${LIB}:
 					make -C ./libft
 
 ## LES REGLES DE SUPPRESSION ET RE ##
@@ -65,7 +66,7 @@ clean:
 
 fclean:				clean
 					make fclean -C ./libft
-					rm ${NAME}
+					rm -f ${NAME}
 
 re:					fclean all
 

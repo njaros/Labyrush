@@ -6,7 +6,7 @@
 /*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/23 14:21:30 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 16:25:06 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,17 @@ void	unir(t_class *a, t_list *b, t_list **first)
 	b_class = b->content;
 	ft_lstadd_back(&a->elem, b_class->elem);
 	if (b == *first)
-	{
-		//aff_lst_nbr(*first);
 		*first = (*first)->next;
-		//aff_lst_nbr(*first);
-		free(b_class);
-		free(b);
-	}
 	else
 	{
 		while ((*first)->next != b)
 			*first = (*first)->next;
 		(*first)->next = b->next;
-		free(b_class);
-		free(b);
 		*first = temp;
 	}
+	b->next = NULL;
+	b_class->elem = NULL;
+	ft_lstclear(&b, gordon_freeman);
 }
 
 int	find(t_list *class_lst, int x, int y)
@@ -281,7 +276,7 @@ t_list	*search_lst(int n, t_list *class)
 	return (NULL);	
 }
 
-void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
+void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 {
 	int		a;
 	int		b;
@@ -290,16 +285,16 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
 	t_list	*tmp;
 
 	seed = reset_seed();
-	a = find(class, bal->x, bal->y);
-	b = find(class, bal->x + dx, bal->y + dy);
+	a = find(*class, bal->x, bal->y);
+	b = find(*class, bal->x + dx, bal->y + dy);
 	if (!a || !b)
 		fprintf(stderr, "\n!!!!!!_____!!!!!!_____!!!!!_____!!!\n");
 	if (a && b && a != b)
 	{
-		uni = search_class(a, class);
-		tmp = search_lst(b, class);
+		uni = search_class(a, *class);
+		tmp = search_lst(b, *class);
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
-		unir(uni, tmp, &class);
+		unir(uni, tmp, class);
 	}
 	else if (a && b && maze[bal->y + dy / 2][bal->x + dx / 2] == '#' && !(seed % 7))
 		maze[bal->y + dy / 2][bal->x + dx / 2] = '.';
@@ -310,7 +305,7 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list *class)
 	}
 }
 
-int	rand_moove(t_pos *bal, int seed, t_list *class, char **maze, int ht, int lg)
+int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg)
 {
 	int		range = 0;
 	int		rand;
@@ -376,9 +371,9 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
 			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y))
 	{
-		seed = rand_moove(&baladeur_rand, seed, lst_class, maze, *ht, *lg);
-		seed = rand_moove(&baladeur_p, seed, lst_class, maze, *ht, *lg);
-		seed = rand_moove(&baladeur_o, seed, lst_class, maze, *ht, *lg);
+		seed = rand_moove(&baladeur_rand, seed, &lst_class, maze, *ht, *lg);
+		seed = rand_moove(&baladeur_p, seed, &lst_class, maze, *ht, *lg);
+		seed = rand_moove(&baladeur_o, seed, &lst_class, maze, *ht, *lg);
 		//usleep(100000);
 		//aff_maze_debug(maze);
 	}
