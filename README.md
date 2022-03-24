@@ -6,30 +6,26 @@
 
 - 2.1/ ./labyrush laby/laby1 ou une autre map que vous pouvez creer.
 
-- 2.2/ executer labyrush sans argument lance une map generee aleatoirement (non implemente pour le moment).
+- 2.2/ executer labyrush sans argument lance une map generee aleatoirement.
 
 - 3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
 
 
 ###### EN TRAVAUX ######
 
-- aff_vue_perso peut etre ameliorer, car pour le moment le personnage voit a travers les murs, pas cool. Mais est-ce si grave ?
+- Faire le programme "pingpong" qui mettra en communication le labyrush et le programme du joueur. Ou en utiliser un déjà existant.
 
-- implementer un temps max pour l attente de stdin.
+- implementer un temps max pour l attente du stdout du programme joueur.
 
-- Decider d'un compteur max total de mouvement.
+- Decider d'un compteur max total de mouvement (genre 1 000).
 
-- réparer le mazer(je pense que le fautif est la fonction unir) puis free la foret.
-
-- Essayer de faire en sorte que fsanatize soit heureux.
-
-- Tests a faire.
+- réparer le mazer (quelques leaks a trouver + refaire la fonction set_random qui n'est pas assez random).
 
 ###### INTRODUCTION ######
 
 Ici est mon 1er sujet de rush.
 
-Ce programme génère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
+Ce programme génère ou récupère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
 Ce sujet est un pompage quasi complet d'un sujet de codingame.
 
 Ce programme crée ou récupère un labyrinthe avec un point E de départ, un point O d'objectif.
@@ -75,4 +71,7 @@ MP compte chaque instruction de PJ, permettant de comparer les algo entre eux.
 
 ### INTERET DE LA SIMULATION ###
 
-Le joueur devra coder un algorithme de découverte de carte ainsi qu'un algorithme de plus court chemin "pathfinding".
+Les joueurs devront coder un algorithme de découverte de carte ainsi qu'un algorithme de plus court chemin "pathfinding".
+Pour le pathfinding, on peut orienter les joueurs sur un algo dijkstra ou a*, ce qui augmentera leur maîtrise des listes.
+
+L'algorithme de découverte de carte sera celui qui déterminera le meilleur score (en cas de succès), donc ce n'est pas le plus simple !
