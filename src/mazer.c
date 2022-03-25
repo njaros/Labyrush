@@ -343,7 +343,6 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 {
 	char			**maze;
 	t_list			*lst_class;
-	t_list			*first;
 	int				seed;
 	t_pos			baladeur_rand; // un baladeur sur un point random
 	t_pos			baladeur_p; // un baladeur sur perso
@@ -367,7 +366,6 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	set_random(perso, objectif, *lg, *ht, &baladeur_rand);
 	baladeur_p = *perso;
 	baladeur_o = *objectif;
-	first = lst_class;
 	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
 			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y))
 	{
