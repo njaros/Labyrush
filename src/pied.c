@@ -22,7 +22,7 @@ void	gordon_freeman(void *class)
 	t_class	*pouet;
 
 	pouet = class;
-	ft_lstclear(&pouet->elem, do_nothing);
+	ft_lstclear(&pouet->elem, free);
 	free(class);
 }
 

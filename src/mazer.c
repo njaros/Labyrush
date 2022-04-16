@@ -288,7 +288,7 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 	a = find(*class, bal->x, bal->y);
 	b = find(*class, bal->x + dx, bal->y + dy);
 	if (!a || !b)
-		fprintf(stderr, "\n!!!!!!_____!!!!!!_____!!!!!_____!!!\n");
+		fprintf(stderr, "\n!!!!!!_____!!!BUUUUUG!!!_____!!!!!_____!!!\n");
 	if (a && b && a != b)
 	{
 		uni = search_class(a, *class);
