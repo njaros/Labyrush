@@ -19,8 +19,7 @@
 
 - Decider d'un compteur max total de mouvement (genre 1 000).
 
-- réparer le mazer (quelques leaks a trouver + refaire la fonction set_random qui n'est pas assez random).
-
+- Sur mazer : refaire l'aleatoire sur les placements des points clefs de la map + ajouter un ou plusieurs autres baladeurs.
 ###### INTRODUCTION ######
 
 Ici est mon 1er sujet de rush.
