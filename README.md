@@ -58,7 +58,7 @@ Fin du jeu si :
 
 MP compte chaque instruction de PJ, permettant de comparer les algo entre eux.
 
-### INTERET DE LA SIMULATION ###
+### INTERET DU RUSH ###
 
 Les joueurs devront coder un algorithme de découverte de carte ainsi qu'un algorithme de plus court chemin "pathfinding".
 Pour le pathfinding, on peut orienter les joueurs sur un algo dijkstra ou a*, ce qui augmentera leur maîtrise des listes.
