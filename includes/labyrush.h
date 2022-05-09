@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   labyrush.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/23 13:43:49 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 14:04:44 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	aff_maze_debug(char **maze);
 // Fonctions moins petites
 
 int		aff_vue_perso(char **maze, t_pos p, int lg, int ht);
-int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip);
+int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg);
 int		a_star(char **map, int row, int col, int xa, int ya, int xb, int yb);
 char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif);
 

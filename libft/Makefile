@@ -28,6 +28,7 @@ SRCS = 	ft_isalnum.c \
 		ft_isdigit.c \
 		ft_memchr.c \
 		ft_memset.c \
+		ft_strcmp.c \
 		ft_putstr_fd.c \
 		ft_strdup.c \
 		ft_strlcpy.c \

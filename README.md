@@ -17,9 +17,6 @@
 
 - implementer un temps max pour l attente du stdout du programme joueur.
 
-- Decider d'un compteur max total de mouvement (genre 1 000).
-
-- Sur mazer : refaire l'aleatoire sur les placements des points clefs de la map + ajouter un ou plusieurs autres baladeurs.
 ###### INTRODUCTION ######
 
 Ici est mon 1er sujet de rush.

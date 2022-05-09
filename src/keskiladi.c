@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keskiladi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:15:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/21 11:45:35 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 14:07:12 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*random_msg_cmd(char *str)
 	struct timeval	t1;
 	int				rand;
 
-	if (ft_strncmp(str, "Coucou", 6) == 0)
+	if (ft_strcmp(str, "Coucou\n") == 0)
 		return ("euh... coucou ? :D\n");
-	if (ft_strncmp(str, "Ca va?", 6) == 0)
+	if (ft_strcmp(str, "Ca va?\n") == 0)
 		return ("Ouiiiiiii ! Et toaaaaaa ?? <3\n");
-	if (ft_strncmp(str, "Fait un truc", 13) == 0)
+	if (ft_strcmp(str, "Fait un truc\n") == 0)
 		return ("Hello World\n");
 	gettimeofday(&t1, NULL);
 	rand = t1.tv_usec % 5;
@@ -83,15 +83,15 @@ char	*random_msg_wall(void)
 
 int	bonne_commande(char *str)
 {
-	if (ft_strncmp(str, "DROITE", 6) == 0)
+	if (ft_strcmp(str, "DROITE\n") == 0)
 		return (1);
-	if (ft_strncmp(str, "BAS", 3) == 0)
+	if (ft_strcmp(str, "BAS\n") == 0)
 		return (2);
-	if (ft_strncmp(str, "GAUCHE", 6) == 0)
+	if (ft_strcmp(str, "GAUCHE\n") == 0)
 		return (3);
-	if (ft_strncmp(str, "HAUT", 4) == 0)
+	if (ft_strcmp(str, "HAUT\n") == 0)
 		return (4);
-	if (ft_strncmp(str, "Je suis Chuck Norris", 20) == 0)
+	if (ft_strcmp(str, "Je suis Chuck Norris\n") == 0)
 		return (5);
 	return (0);
 }
@@ -115,7 +115,7 @@ void	set_moove(int cmd, int *dx, int *dy)
 	}
 }
 
-int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip)
+int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg)
 {
 	int			cmd;
 	static int	decompte = 0;
@@ -126,7 +126,8 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 	if (!cmd)
 	{
 		*rip = 1;
-		printf("%s", random_msg_cmd(lecture));
+		*msg = ft_strdup(random_msg_cmd(lecture));
+		//printf("%s", random_msg_cmd(lecture));
 		return (0);
 	}
 	if (cmd == 5)
@@ -138,7 +139,8 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 	{
 		*rip = 1;
 		maze[pers->y][pers->x] = 'P';
-		printf("%s", random_msg_timer());
+		*msg = ft_strdup(random_msg_timer());
+		//printf("%s", random_msg_timer());
 		return (1);
 	}
 	set_moove(cmd, &dx, &dy);
@@ -147,7 +149,8 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 		*rip = 1;
 		maze[pers->y][pers->x] = 'P';
 		maze[pers->y + dy][pers->x + dx] = '%';
-		printf("%s", random_msg_wall());
+		*msg = ft_strdup(random_msg_wall());
+		//printf("%s", random_msg_wall());
 		return (1);
 	}
 	pers->x += dx;

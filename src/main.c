@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/23 16:26:08 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 14:05:36 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	main(int ac, char **av)
 	int		rip = 0;
 	int		compteur = 0;
 	char	**maze;
+	char	*lulz_msg = NULL;
 	char	lecture[50];
 
 	if (ac == 1)
@@ -137,7 +138,9 @@ int	main(int ac, char **av)
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
 		fgets(lecture, 48, stdin);
-		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip);
+		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg);
+		if (compteur > 1000)
+			rip = 1;
 	}
 	printf("\n\n -----------BILAN---------- \n\n");
 	aff_maze(maze);
@@ -146,6 +149,8 @@ int	main(int ac, char **av)
 	if (victoire == 2)
 		printf("\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
 	if (rip)
-		printf("\n\n--DEFAITE-- \n\n %d mouvements\n\n", compteur);
+		printf("\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n\n", lulz_msg, compteur);
+	if (lulz_msg)
+		free(lulz_msg);
 	return (0);
 }

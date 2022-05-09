@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: njaros <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 13:47:18 by njaros            #+#    #+#              #
-#    Updated: 2022/03/23 15:19:13 by njaros           ###   ########lyon.fr    #
+#    Updated: 2022/05/09 13:29:40 by njaros           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIB = libft/libft.a
 
 LST_SRCS =	main.c \
 			a_star.c \
-			mazer.c \
+			mazer_v2.c \
 			keskiladi.c \
 			pied.c
 LST_OBJS = ${LST_SRCS:.c=.o}
