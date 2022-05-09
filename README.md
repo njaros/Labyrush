@@ -13,8 +13,6 @@
 
 ###### EN TRAVAUX ######
 
-- Faire le programme "pingpong" qui mettra en communication le labyrush et le programme du joueur. Ou en utiliser un déjà existant.
-
 - implementer un temps max pour l attente du stdout du programme joueur.
 
 ###### INTRODUCTION ######

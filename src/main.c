@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/05/09 14:05:36 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 15:48:50 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,19 +109,54 @@ char	**recup_map(char *to_open, int *lg, int *ht, t_pos *pers, t_pos *obj)
 	return (maze);
 }
 
+int	ms(struct timeval t1, struct timeval t2)
+{
+	int	temps_ms;
+
+	temps_ms = (t2.tv_sec - t1.tv_sec) * 1000;
+	temps_ms += (t2.tv_usec - t1.tv_usec) / 1000;
+	return (temps_ms);
+}
+
+void	*timeout_handler(void *arg)
+{
+	int				timeout;
+	struct timeval	*tps;
+	struct timeval	current;
+	long int		first;
+
+	timeout = 50000;
+	tps = arg;
+	first = tps->tv_usec + tps->tv_sec * 1000000;
+	while (1)
+	{
+		gettimeofday(&current, NULL);
+		if (ms(*tps, current) > timeout)
+		{
+			printf("\ntimeout...\n\n --DEFAITE-- \n\n");
+			exit(0);
+		}
+		if (timeout == 50000 && first != tps->tv_usec + tps->tv_sec * 1000000)
+			timeout = 5000;
+		usleep(1000);
+	}
+}
+
 int	main(int ac, char **av)
 {
-	t_pos	perso;
-	t_pos	objectif;
-	int		lg = 0;
-	int		ht = 0;
-	int		timer;
-	int		victoire = 0;
-	int		rip = 0;
-	int		compteur = 0;
-	char	**maze;
-	char	*lulz_msg = NULL;
-	char	lecture[50];
+	t_pos			perso;
+	t_pos			objectif;
+	int				lg = 0;
+	int				ht = 0;
+	int				timer;
+	int				victoire = 0;
+	int				rip = 0;
+	int				compteur = 0;
+	char			**maze;
+	char			*lulz_msg = NULL;
+	char			lecture[50];
+	pthread_t		timeout;
+	struct timeval	last_input;
 
 	if (ac == 1)
 		maze = mazer(&lg, &ht, &perso, &objectif);
@@ -133,12 +168,15 @@ int	main(int ac, char **av)
 	printf("lg = %d\nht = %d\nperso_x = %d\nperso_y = %d\n", lg, ht, perso.x, perso.y);
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 	printf("compte a rebours une fois B atteint = %d\n", timer);
+	gettimeofday(&last_input, NULL);
+	pthread_create(&timeout, NULL, timeout_handler, &last_input);
 	while (!victoire && !rip)
 	{
 		if (!aff_vue_perso(maze, perso, lg, ht))
 			return (err(2, maze));
 		fgets(lecture, 48, stdin);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg);
+		gettimeofday(&last_input, NULL);
 		if (compteur > 1000)
 			rip = 1;
 	}
@@ -152,5 +190,7 @@ int	main(int ac, char **av)
 		printf("\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n\n", lulz_msg, compteur);
 	if (lulz_msg)
 		free(lulz_msg);
+	pthread_cancel(timeout);
+	pthread_detach(timeout);
 	return (0);
 }

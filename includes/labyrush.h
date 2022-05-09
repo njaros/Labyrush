@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/05/09 14:04:44 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 14:33:41 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/time.h>
 # include <math.h>
 # include <fcntl.h>
+# include <pthread.h>
 
 // La structure ci-dessous aide un peu à la lisibilité du programme
 
