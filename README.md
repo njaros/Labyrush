@@ -8,7 +8,7 @@
 
 - 2.2/ executer labyrush sans argument lance une map generee aleatoirement.
 
-- 3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
+- 3/ Le programme attent ensuite les bonnes commandes sur stdin. les valeurs attendues sont "HAUT\n", "BAS\n", "GAUCHE\n", "DROITE\n" ou autre chose.
 
 ###### INTRODUCTION ######
 
