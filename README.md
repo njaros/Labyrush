@@ -10,11 +10,6 @@
 
 - 3/ Le programme attent ensuite les bonnes commandes sur stdin. Vous pouvez taper HAUT, BAS, GAUCHE, DROITE ou autre chose.
 
-
-###### EN TRAVAUX ######
-
-- implementer un temps max pour l attente du stdout du programme joueur.
-
 ###### INTRODUCTION ######
 
 Ici est mon 1er sujet de rush.
