@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pied.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/23 14:11:04 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:58:59 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	freeteuse(void *to_free)
 	free(to_free);
 }
 
-int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
+int	aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log)
 {
 	char	**vision;
 	int		x;
@@ -80,6 +80,7 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht)
 	while (++y < 5)
 	{
 		printf("%s\n", vision[y]);
+		fprintf(fd_log, "subject said : %s\n", vision[y]);
 		free(vision[y]);
 	}
 	free(vision);
@@ -97,7 +98,7 @@ void	aff_maze_debug(char **maze)
 	fprintf(stderr, "\n");
 }
 
-void	aff_maze(char **maze)
+void	aff_maze(char **maze, FILE *fd_log)
 {
 	int	i;
 	int	j;
@@ -110,19 +111,40 @@ void	aff_maze(char **maze)
 		while (maze[j][++i])
 		{
 			if (maze[j][i] == '%')
+			{
 				printf("💥");
+				fprintf(fd_log, "💥");
+			}
 			else if (maze[j][i] == '#')
+			{
 				printf("🏰");
+				fprintf(fd_log, "🏰");
+			}
 			else if (maze[j][i] == 'O')
+			{
 				printf("🥧");
+				fprintf(fd_log, "🥧");
+			}
 			else if (maze[j][i] == 'E')
+			{
 				printf("🍽 ");
+				fprintf(fd_log, "🍽");
+			}
 			else if (maze[j][i] == '.')
+			{
 				printf("🔲");
+				fprintf(fd_log, "🔲");
+			}
 			else if (maze[j][i] == 'P')
+			{
 				printf("🚙");
+				fprintf(fd_log, "🚙");
+			}
 			else
+			{
 				printf("%c", maze[j][i]);
+				fprintf(fd_log, "%c", maze[j][i]);
+			}
 		}
 		free(maze[j]);
 	}

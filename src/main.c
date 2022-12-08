@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/05/09 15:48:50 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:48:03 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	err(int e, void *to_free)
 		fprintf(stderr, "erreur memoire affichage personnage\n");
 		freeteuse(to_free);
 	}
+	if (e == 3)
+		fprintf(stderr, "le ficher result.log ne s'est pas crée\n");
 	return (e);
 }
 
@@ -164,30 +166,56 @@ int	main(int ac, char **av)
 		maze = recup_map(av[1], &lg, &ht, &perso, &objectif);
 	if (!maze)
 		return (err(1, NULL));
+	int fd_log_create = open("result.log", O_CREAT | O_TRUNC, 0644);
+	if (fd_log_create == -1)
+		return (err(3, NULL));
 	lecture[49] = '\0';
-	printf("lg = %d\nht = %d\nperso_x = %d\nperso_y = %d\n", lg, ht, perso.x, perso.y);
+	
+	FILE *fd_log = fopen("result.log", "w");
+
+	printf("lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
+	fprintf(fd_log, "lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
+	
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
+
 	printf("compte a rebours une fois B atteint = %d\n", timer);
+	fprintf(fd_log, "compte a rebours une fois B atteint = %d\n\n", timer);
+	
 	gettimeofday(&last_input, NULL);
 	pthread_create(&timeout, NULL, timeout_handler, &last_input);
+	
 	while (!victoire && !rip)
 	{
-		if (!aff_vue_perso(maze, perso, lg, ht))
+		if (!aff_vue_perso(maze, perso, lg, ht, fd_log))
 			return (err(2, maze));
 		fgets(lecture, 48, stdin);
+		fprintf(fd_log, "\nsolver said : %s\n", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg);
 		gettimeofday(&last_input, NULL);
 		if (compteur > 1000)
 			rip = 1;
 	}
+
 	printf("\n\n -----------BILAN---------- \n\n");
-	aff_maze(maze);
+	fprintf(fd_log, "\n\n -----------BILAN---------- \n\n");
+	
+	aff_maze(maze, fd_log);
+	fprintf(stderr, "test\n");
 	if (victoire == 1)
+	{
 		printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
+		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
+	}
 	if (victoire == 2)
+	{
 		printf("\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
+		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
+	}
 	if (rip)
+	{
 		printf("\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n\n", lulz_msg, compteur);
+		fprintf(fd_log, "\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n", lulz_msg, compteur);
+	}
 	if (lulz_msg)
 		free(lulz_msg);
 	pthread_cancel(timeout);
