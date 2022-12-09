@@ -265,11 +265,11 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 {
 	int		a;
 	int		b;
-	int		seed;
+	//int		seed;
 	t_class	*uni;
 	t_list	*tmp;
 
-	seed = reset_seed();
+	//seed = reset_seed();
 	a = find(*class, bal->x, bal->y);
 	b = find(*class, bal->x + dx, bal->y + dy);
 	if (!a || !b)
