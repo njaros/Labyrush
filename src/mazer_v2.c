@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:17:42 by njaros            #+#    #+#             */
-/*   Updated: 2022/05/09 13:38:33 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 18:18:21 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,8 +340,8 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	
 	lst_class = NULL;
 	seed = reset_seed();
-	*lg = (seed % 21) + 10;
-	*ht = ((seed << 1) % 21) + 10;
+	*lg = (seed % 51) + 50;
+	*ht = ((seed << 1) % 51) + 50;
 	if (*lg % 2 == 0)
 		*lg += 1;
 	if (*ht % 2 == 0)

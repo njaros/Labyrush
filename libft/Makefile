@@ -45,7 +45,17 @@ SRCS = 	ft_isalnum.c \
 		ft_lstadd_front.c \
 		ft_lstlast.c \
 		get_next_line.c \
-		get_next_line_utils.c
+		get_next_line_utils.c \
+		ft_int.c \
+		ft_printf.c \
+		ft_putadr.c \
+		ft_putchar_printf.c \
+		ft_puthexa_fd.c \
+		ft_putnbr_printf.c \
+		ft_putstr_printf.c \
+		ft_putunsignedint_fd.c \
+		ft_read.c \
+		ft_unsignedint.c
 OBJS = ${SRCS:.c=.o}
 HEADERS_PATH = ../includes
 HEADERS = ../includes/libft.h

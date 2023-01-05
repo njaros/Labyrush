@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2022/12/08 18:48:03 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 17:14:14 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,12 @@ int	main(int ac, char **av)
 	
 	FILE *fd_log = fopen("result.log", "w");
 
-	printf("lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
+	ft_printf("lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
 	fprintf(fd_log, "lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
 	
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 
-	printf("compte a rebours une fois B atteint = %d\n", timer);
+	ft_printf("compte a rebours une fois B atteint = %d\n", timer);
 	fprintf(fd_log, "compte a rebours une fois B atteint = %d\n\n", timer);
 	
 	gettimeofday(&last_input, NULL);
@@ -188,32 +188,33 @@ int	main(int ac, char **av)
 	{
 		if (!aff_vue_perso(maze, perso, lg, ht, fd_log))
 			return (err(2, maze));
-		fgets(lecture, 48, stdin);
+		read(0, lecture, 50);
 		fprintf(fd_log, "\nsolver said : %s\n", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg);
 		gettimeofday(&last_input, NULL);
 		if (compteur > 1000)
 			rip = 1;
+		ft_bzero(lecture, 50);
 	}
 
-	printf("\n\n -----------BILAN---------- \n\n");
+	ft_printf("\n\n -----------BILAN---------- \n\n");
 	fprintf(fd_log, "\n\n -----------BILAN---------- \n\n");
 	
 	aff_maze(maze, fd_log);
 	fprintf(stderr, "test\n");
 	if (victoire == 1)
 	{
-		printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
+		ft_printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 	}
 	if (victoire == 2)
 	{
-		printf("\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
+		ft_printf("\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
 		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : 0 mouvement\n\n");
 	}
 	if (rip)
 	{
-		printf("\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n\n", lulz_msg, compteur);
+		ft_printf("\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n\n", lulz_msg, compteur);
 		fprintf(fd_log, "\n\n%s\n\n--DEFAITE-- \n\n %d mouvements\n", lulz_msg, compteur);
 	}
 	if (lulz_msg)

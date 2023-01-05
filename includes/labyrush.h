@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2022/12/08 18:42:32 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 16:26:25 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct noeud
 void	free_tabtab(int **to_free);
 void	freeteuse(void *to_free);
 void	gordon_freeman(void *class);
+void	say_hello(int lg, int ht, int x, int y);
 void	aff_maze(char **maze, FILE *fd_log);
 void	aff_maze_debug(char **maze);
 

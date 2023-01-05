@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -77,5 +78,20 @@ char	*ft_substr_free(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 char	*ft_strjoin_free(char *s1, char *s2, int del);
 char	*ft_return_and_keep(char **temp, char *line, int n);
+
+// FT_PRINTF
+
+int	ft_printf(const char *fmt, ...);
+int	ft_read(const char *fmt, va_list ap);
+int	ft_putnbr_printf(int n, int fd);
+int	ft_recuputnbr_printf(long n, int fd);
+int	ft_putchar_printf(char c, int fd);
+int	ft_putunsignedint_fd(unsigned int n, int fd);
+int	ft_putstr_printf(char *s, int fd);
+int	ft_puthexa_fd(unsigned int nb, char *base, int fd);
+int	ft_putadr(unsigned long int adr, int fd);
+int	recu_adr(unsigned long int nb, char *base, int fd);
+int	ft_int(int ap, char type);
+int	ft_unsignedint(unsigned int ap, char type);
 
 #endif
