@@ -45,7 +45,7 @@ INCLUDES =	$(addprefix ${PATH_INCLUDES}/,${LST_INCLUDES})
 all :				Makefile ${LIB} ${NAME}
 
 ${NAME} :			${OBJS}
-					${CC} ${FLAGS} ${OBJS} ${LIB} -o $@
+					${CC} ${FLAGS} ${OBJS} ${LIB} -pthread -o $@
 
 ${PATH_OBJS}/%.o:	${PATH_SRCS}/%.c ${INCLUDES} ${LIB} Makefile | ${PATH_OBJS}
 					${CC} ${FLAGS} -c $< -o $@ -I ${PATH_INCLUDES}

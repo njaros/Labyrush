@@ -201,7 +201,6 @@ int	main(int ac, char **av)
 	fprintf(fd_log, "\n\n -----------BILAN---------- \n\n");
 	
 	aff_maze(maze, fd_log);
-	fprintf(stderr, "test\n");
 	if (victoire == 1)
 	{
 		ft_printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);

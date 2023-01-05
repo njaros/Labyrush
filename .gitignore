@@ -2,3 +2,5 @@
 .DS_STORE
 labyrush
 libft.a
+test.c
+result.log
