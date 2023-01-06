@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/05 16:48:43 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 08:59:03 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log)
 		y++;
 	}
 	y = -1;
+	fprintf(fd_log, "Current vision : \n\n");
 	while (++y < 5)
 	{
 		ft_printf("%s\n", vision[y]);
-		fprintf(fd_log, "subject said : %s\n", vision[y]);
+		fprintf(fd_log, "%s\n", vision[y]);
 		free(vision[y]);
 	}
 	free(vision);
@@ -103,7 +104,7 @@ void	aff_maze(char **maze, FILE *fd_log)
 	int	i;
 	int	j;
 
-	ft_printf("\n");
+	//ft_printf("\n");
 	j = -1;
 	while (maze[++j])
 	{
@@ -112,37 +113,37 @@ void	aff_maze(char **maze, FILE *fd_log)
 		{
 			if (maze[j][i] == '%')
 			{
-				ft_printf("💥");
+				//ft_printf("💥");
 				fprintf(fd_log, "💥");
 			}
 			else if (maze[j][i] == '#')
 			{
-				ft_printf("🏰");
+				//ft_printf("🏰");
 				fprintf(fd_log, "🏰");
 			}
 			else if (maze[j][i] == 'O')
 			{
-				ft_printf("🥧");
+				//ft_printf("🥧");
 				fprintf(fd_log, "🥧");
 			}
 			else if (maze[j][i] == 'E')
 			{
-				ft_printf("🍽 ");
+				//ft_printf("🍽 ");
 				fprintf(fd_log, "🍽");
 			}
 			else if (maze[j][i] == '.')
 			{
-				ft_printf("🔲");
+				//ft_printf("🔲");
 				fprintf(fd_log, "🔲");
 			}
 			else if (maze[j][i] == 'P')
 			{
-				ft_printf("🚙");
+				//ft_printf("🚙");
 				fprintf(fd_log, "🚙");
 			}
 			else
 			{
-				ft_printf("%c", maze[j][i]);
+				//ft_printf("%c", maze[j][i]);
 				fprintf(fd_log, "%c", maze[j][i]);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:15:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/12/08 17:46:45 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 10:46:08 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*random_msg_wall(void)
 	switch (rand)
 	{
 		case 0:
-			return ("On a oublié de vous dire que les murs sont électrisés. Oupsi\n");
+			return ("On a oublié de vous dire que les murs sont électrisés. Oups!\n");
 		case 1:
 			return ("Boire ou conduire, il faut boire\n");
 		case 2:
@@ -83,15 +83,15 @@ char	*random_msg_wall(void)
 
 int	bonne_commande(char *str)
 {
-	if (ft_strcmp(str, "DROITE\n") == 0)
+	if (!ft_strncmp(str, "DROITE\n", 7) || !ft_strncmp(str, "RIGHT\n", 6))
 		return (1);
-	if (ft_strcmp(str, "BAS\n") == 0)
+	if (!ft_strncmp(str, "BAS\n", 4) || !ft_strncmp(str, "DOWN\n", 5))
 		return (2);
-	if (ft_strcmp(str, "GAUCHE\n") == 0)
+	if (!ft_strncmp(str, "GAUCHE\n", 7) || !ft_strncmp(str, "LEFT\n", 5))
 		return (3);
-	if (ft_strcmp(str, "HAUT\n") == 0)
+	if (!ft_strncmp(str, "HAUT\n", 5) || !ft_strncmp(str, "UP\n", 3))
 		return (4);
-	if (ft_strcmp(str, "Je suis Chuck Norris\n") == 0)
+	if (!ft_strcmp(str, "Je suis Chuck Norris\n"))
 		return (5);
 	return (0);
 }
@@ -115,7 +115,7 @@ void	set_moove(int cmd, int *dx, int *dy)
 	}
 }
 
-int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg)
+int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg, time_handler *th, long astar_timer)
 {
 	int			cmd;
 	static int	decompte = 0;
@@ -127,7 +127,6 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 	{
 		*rip = 1;
 		*msg = ft_strdup(random_msg_cmd(lecture));
-		//printf("%s", random_msg_cmd(lecture));
 		return (0);
 	}
 	if (cmd == 5)
@@ -140,7 +139,6 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 		*rip = 1;
 		maze[pers->y][pers->x] = 'P';
 		*msg = ft_strdup(random_msg_timer());
-		//printf("%s", random_msg_timer());
 		return (1);
 	}
 	set_moove(cmd, &dx, &dy);
@@ -150,14 +148,31 @@ int	keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire
 		maze[pers->y][pers->x] = 'P';
 		maze[pers->y + dy][pers->x + dx] = '%';
 		*msg = ft_strdup(random_msg_wall());
-		//printf("%s", random_msg_wall());
 		return (1);
 	}
 	pers->x += dx;
 	pers->y += dy;
 	if (maze[pers->y][pers->x] == 'O' && !decompte)
+	{
 		decompte = 1;
+		pthread_mutex_lock(&(th->mut));
+		th->timeout = astar_timer;
+		pthread_mutex_unlock(&(th->mut));
+	}
 	if (maze[pers->y][pers->x] == 'E' && decompte)
 		*victoire = 1;
 	return (1);
+}
+
+int	ask_if_is_bot()
+{
+	char lecture[10];
+	ft_printf("are you a bot ? (y/n)\n");
+	read(0, lecture, 10);
+	if (!ft_strncmp(lecture, "y\n", 2))
+		return 1;
+	if (!ft_strncmp(lecture, "n\n", 2))
+		return 0;
+	ft_printf("????\n");
+	exit(0);
 }

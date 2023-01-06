@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/05 17:14:14 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 11:01:43 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,27 +120,32 @@ int	ms(struct timeval t1, struct timeval t2)
 	return (temps_ms);
 }
 
+long	us(struct timeval t1, struct timeval t2)
+{
+	long	temps_us;
+
+	temps_us = (t2.tv_sec - t1.tv_sec) * 1000000;
+	temps_us += (t2.tv_usec - t1.tv_usec);
+	return (temps_us);
+}
+
 void	*timeout_handler(void *arg)
 {
-	int				timeout;
-	struct timeval	*tps;
+	time_handler	*tps;
 	struct timeval	current;
-	long int		first;
-
-	timeout = 50000;
+	
 	tps = arg;
-	first = tps->tv_usec + tps->tv_sec * 1000000;
 	while (1)
 	{
 		gettimeofday(&current, NULL);
-		if (ms(*tps, current) > timeout)
+		pthread_mutex_lock(&(tps->mut));
+		if (us(*(tps->t), current) > tps->timeout)
 		{
 			printf("\ntimeout...\n\n --DEFAITE-- \n\n");
 			exit(0);
 		}
-		if (timeout == 50000 && first != tps->tv_usec + tps->tv_sec * 1000000)
-			timeout = 5000;
-		usleep(1000);
+		pthread_mutex_unlock(&(tps->mut));
+		usleep(100);
 	}
 }
 
@@ -151,6 +156,7 @@ int	main(int ac, char **av)
 	int				lg = 0;
 	int				ht = 0;
 	int				timer;
+	int				is_bot;
 	int				victoire = 0;
 	int				rip = 0;
 	int				compteur = 0;
@@ -159,6 +165,9 @@ int	main(int ac, char **av)
 	char			lecture[50];
 	pthread_t		timeout;
 	struct timeval	last_input;
+	struct timeval	begin;
+	time_handler	th;
+	long			astar_time;
 
 	if (ac == 1)
 		maze = mazer(&lg, &ht, &perso, &objectif);
@@ -171,30 +180,63 @@ int	main(int ac, char **av)
 		return (err(3, NULL));
 	lecture[49] = '\0';
 	
+	fprintf(stderr, "maze done/parsed \n");
+
+	aff_maze_debug(maze);
+	
+	is_bot = ask_if_is_bot();
+	
 	FILE *fd_log = fopen("result.log", "w");
 
-	ft_printf("lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
-	fprintf(fd_log, "lg = %d ht = %d perso_x = %d perso_y = %d\n", lg, ht, perso.x, perso.y);
+	ft_printf("width = %d high = %d begin_x = %d begin_y = %d\n", lg, ht, perso.x, perso.y);
+	fprintf(fd_log, "width = %d high = %d begin_x = %d begin_y = %d\n", lg, ht, perso.x, perso.y);
+	
+	gettimeofday(&begin, NULL);
 	
 	timer = a_star(maze, ht, lg, perso.x, perso.y, objectif.x, objectif.y);
 
-	ft_printf("compte a rebours une fois B atteint = %d\n", timer);
-	fprintf(fd_log, "compte a rebours une fois B atteint = %d\n\n", timer);
-	
 	gettimeofday(&last_input, NULL);
-	pthread_create(&timeout, NULL, timeout_handler, &last_input);
+
+	astar_time = us(begin, last_input) * 2;
+	
+	fprintf(stderr, "a star done in time : %ld usec \n", us(begin, last_input));
+
+	ft_printf("timer until O (goal) reached = %d\n", timer);
+	fprintf(fd_log, "timer until O (goal) reached = %d\n\n", timer);
+	
+	if (is_bot)
+	{
+		gettimeofday(&last_input, NULL);
+		begin.tv_sec = last_input.tv_sec;
+		begin.tv_usec = last_input.tv_usec;
+		th.t = &last_input;
+		th.timeout = 1000;
+		if (pthread_mutex_init(&(th.mut), NULL))
+		{
+			fprintf(stderr, "mutex init fail\n");
+			return 1;
+		}
+		pthread_create(&timeout, NULL, timeout_handler, &th);
+	}
 	
 	while (!victoire && !rip)
 	{
+		ft_bzero(lecture, 50);
 		if (!aff_vue_perso(maze, perso, lg, ht, fd_log))
 			return (err(2, maze));
 		read(0, lecture, 50);
+		if (is_bot)
+		{
+			pthread_mutex_lock(&(th.mut));
+			gettimeofday(&last_input, NULL);
+			if (th.timeout == astar_time)
+				th.timeout = 1000;
+			pthread_mutex_unlock(&(th.mut));
+		}
 		fprintf(fd_log, "\nsolver said : %s\n", lecture);
-		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg);
-		gettimeofday(&last_input, NULL);
+		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg, &th, astar_time);
 		if (compteur > 1000)
 			rip = 1;
-		ft_bzero(lecture, 50);
 	}
 
 	ft_printf("\n\n -----------BILAN---------- \n\n");
@@ -205,6 +247,8 @@ int	main(int ac, char **av)
 	{
 		ft_printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
+		if (is_bot)
+			fprintf(fd_log, "time to resolve : %ld usecs\n\n", us(last_input, begin));
 	}
 	if (victoire == 2)
 	{

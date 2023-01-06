@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/05 16:26:25 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 10:44:23 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ typedef struct noeud
     struct noeud	*parent;
 }	noeud;
 
+// La structure ci-sessous est utilisé pour la gestion du temps
+
+typedef struct time_handler
+{
+	struct timeval	*t;
+	long			timeout;
+	pthread_mutex_t	mut;
+}	time_handler;
+
 // Ptites fonctions utiles
 
 void	free_tabtab(int **to_free);
@@ -65,11 +74,12 @@ void	gordon_freeman(void *class);
 void	say_hello(int lg, int ht, int x, int y);
 void	aff_maze(char **maze, FILE *fd_log);
 void	aff_maze_debug(char **maze);
+int		ask_if_is_bot();
 
 // Fonctions moins petites
 
 int		aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log);
-int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg);
+int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg, time_handler *th, long astar_timer);
 int		a_star(char **map, int row, int col, int xa, int ya, int xb, int yb);
 char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif);
 
