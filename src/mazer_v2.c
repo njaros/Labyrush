@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:17:42 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 12:16:30 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 14:21:24 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	
 	lst_class = NULL;
 	seed = reset_seed();
-	*lg = (seed % 20) + 10;
-	*ht = ((seed << 1) % 20) + 10;
+	*lg = (seed % 20) + 50;
+	*ht = ((seed << 1) % 20) + 50;
 	if (*lg % 2 == 0)
 		*lg += 1;
 	if (*ht % 2 == 0)
@@ -183,9 +183,9 @@ char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	seed = set_random(&baladeur_rand2, *lg, *ht, seed);
 	baladeur_p = *perso;
 	baladeur_o = *objectif;
-	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
-			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y)
-			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand2.x, baladeur_rand2.y))
+	while (!(find(lst_class, perso->x, perso->y) == find(lst_class, objectif->x, objectif->y)
+			&& find(lst_class, objectif->x, objectif->y) == find(lst_class, baladeur_rand.x, baladeur_rand.y)
+			&& find(lst_class, objectif->x, objectif->y) == find(lst_class, baladeur_rand2.x, baladeur_rand2.y)))
 	{
 		seed = rand_moove(&baladeur_rand, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_p, seed, &lst_class, maze, *ht, *lg);

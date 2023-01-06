@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 12:16:04 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 14:18:12 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void	aff_class(t_class *class)
 	}
 }
 
-static void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *rand)
+static void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *rand, t_pos *rand2)
 {
 	struct timeval	t;
 	int				val_x;
@@ -245,6 +245,8 @@ static void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *ran
 		objectif->y = 2 * ((t.tv_usec << 1) % val_y) + 1;
 		rand->x = 2 * ((t.tv_usec << 2) % val_x) + 1;
 		rand->y = 2 * ((t.tv_usec << 2) % val_y) + 1;
+		rand2->x = 2 * ((t.tv_usec << 3) % val_x) + 1;
+		rand2->y = 2 * ((t.tv_usec << 3) % val_y) + 1;
 	}
 }
 
@@ -345,10 +347,11 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	t_list			*lst_class;
 	int				seed;
 	t_pos			baladeur_rand; // un baladeur sur un point random
+	t_pos			baladeur_rand2; // un autre
 	t_pos			baladeur_p; // un baladeur sur perso
 	t_pos			baladeur_o; // un baladeur sur objectif
 
-	// L'idée est de faire se promener aléatoirement 3 électrons libre partant du personnage, de l'objectif et d'un endroit random.
+	// L'idée est de faire se promener aléatoirement 4 électrons libre partant du personnage, de l'objectif et d'un endroit random.
 	// A chaque déplacement, l'électron "décide" s'il casse un mur qu'il rencontre en se basant en grande partie sur l'algo Union_Find.
 	// L'algo stoppe dès qu'un chemin est créé entre perso et objectif.
 	
@@ -363,13 +366,15 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	maze = mazer_init(*lg, *ht, &lst_class);
 	if (!maze)
 		return (NULL);
-	set_random(perso, objectif, *lg, *ht, &baladeur_rand);
+	set_random(perso, objectif, *lg, *ht, &baladeur_rand, &baladeur_rand2);
 	baladeur_p = *perso;
 	baladeur_o = *objectif;
-	while (find(lst_class, perso->x, perso->y) != find(lst_class, objectif->x, objectif->y)
-			|| find(lst_class, objectif->x, objectif->y) != find(lst_class, baladeur_rand.x, baladeur_rand.y))
+	while (!(find(lst_class, perso->x, perso->y) == find(lst_class, objectif->x, objectif->y)
+			&& find(lst_class, objectif->x, objectif->y) == find(lst_class, baladeur_rand.x, baladeur_rand.y)
+			&& find(lst_class, objectif->x, objectif->y) == find(lst_class, baladeur_rand2.x, baladeur_rand2.y)))
 	{
 		seed = rand_moove(&baladeur_rand, seed, &lst_class, maze, *ht, *lg);
+		seed = rand_moove(&baladeur_rand2, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_p, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_o, seed, &lst_class, maze, *ht, *lg);
 		//usleep(100000);
