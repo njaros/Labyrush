@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 11:01:43 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 12:09:28 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,18 @@ void	*timeout_handler(void *arg)
 	}
 }
 
+char **choose_mazer(int *lg, int *ht, t_pos *p, t_pos *o)
+{
+	int seed = reset_seed();
+	switch (seed % 2)
+	{
+		case 1:
+			return (mazer(lg, ht, p, o));
+		default:
+			return (mazer2(lg, ht, p, o));
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_pos			perso;
@@ -170,7 +182,7 @@ int	main(int ac, char **av)
 	long			astar_time;
 
 	if (ac == 1)
-		maze = mazer(&lg, &ht, &perso, &objectif);
+		maze = choose_mazer(&lg, &ht, &perso, &objectif);
 	else
 		maze = recup_map(av[1], &lg, &ht, &perso, &objectif);
 	if (!maze)

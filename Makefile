@@ -6,7 +6,7 @@
 #    By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 13:47:18 by njaros            #+#    #+#              #
-#    Updated: 2022/05/09 13:29:40 by njaros           ###   ########lyon.fr    #
+#    Updated: 2023/01/06 11:58:31 by njaros           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ LIB = libft/libft.a
 
 LST_SRCS =	main.c \
 			a_star.c \
+			mazer.c \
 			mazer_v2.c \
 			keskiladi.c \
 			pied.c

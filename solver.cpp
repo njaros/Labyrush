@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 
+// This is a C++ exemple solver
+
 int	main(void)
 {
 	std::string	line;

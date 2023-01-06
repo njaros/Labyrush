@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mazer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njaros <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:40:28 by njaros            #+#    #+#             */
-/*   Updated: 2022/03/23 16:25:06 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 12:16:04 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void	aff_class(t_class *class)
 	}
 }
 
-void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *rand)
+static void	set_random(t_pos *perso, t_pos *objectif, int lg, int ht, t_pos *rand)
 {
 	struct timeval	t;
 	int				val_x;
@@ -276,7 +276,7 @@ t_list	*search_lst(int n, t_list *class)
 	return (NULL);	
 }
 
-void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
+static void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 {
 	int		a;
 	int		b;
@@ -305,7 +305,7 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 	}
 }
 
-int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg)
+static int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg)
 {
 	int		range = 0;
 	int		rand;
@@ -354,8 +354,8 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	
 	lst_class = NULL;
 	seed = reset_seed();
-	*lg = (seed % 21) + 10;
-	*ht = ((seed << 1) % 21) + 10;
+	*lg = (seed % 21) + 50;
+	*ht = ((seed << 1) % 21) + 50;
 	if (*lg % 2 == 0)
 		*lg += 1;
 	if (*ht % 2 == 0)

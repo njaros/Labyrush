@@ -6,143 +6,13 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:17:42 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/05 18:18:21 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 12:16:30 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "labyrush.h"
 
-int	reset_seed(void)
-{
-	struct timeval	t1;
-
-	gettimeofday(&t1, NULL);
-	return (t1.tv_usec);
-}
-
-void	clean_lst(t_list *lst)
-{
-	t_list	*temp;
-
-	temp = NULL;
-	while (lst)
-	{
-		if (!lst->content)
-		{
-			if (!temp)
-			{
-				temp = lst->next;
-				free(lst);
-				lst = temp;
-				temp = NULL;
-			}
-			else
-			{
-				temp->next = lst->next;
-				free(lst);
-				lst = temp->next;
-			}
-		}
-		else
-		{
-			temp = lst;
-			lst = lst->next;
-		}
-	}
-}
-
-void	aff_lst_nbr(t_list *lst)
-{
-	t_class *current;
-	t_elem	*e;
-
-	current = lst->content;
-	e = current->elem->content;
-	fprintf(stderr,"aff_________ %d | %d\n", e->x, e->y);
-}
-
-void	unir(t_class *a, t_list *b, t_list **first)
-{
-	t_class	*b_class;
-	t_list	*temp;
-
-	temp = *first;
-	b_class = b->content;
-	ft_lstadd_back(&a->elem, b_class->elem);
-	if (b == *first)
-		*first = (*first)->next;
-	else
-	{
-		while ((*first)->next != b)
-			*first = (*first)->next;
-		(*first)->next = b->next;
-		*first = temp;
-	}
-	b->next = NULL;
-	b_class->elem = NULL;
-	ft_lstclear(&b, gordon_freeman);
-}
-
-int	find(t_list *class_lst, int x, int y)
-{
-	t_class *current;
-	t_list	*ptr;
-	t_elem	*e;
-
-	//fprintf(stderr, "%d, %d\n", x, y);
-	while (class_lst)
-	{
-		//fprintf(stderr, "check class content\n");
-		current = class_lst->content;
-		//fprintf(stderr, "check elem\n");
-		ptr = current->elem;
-		while (ptr)
-		{
-			//fprintf(stderr, "check elem content\n");
-			e = ptr->content;
-			if (x == e->x && y == e->y)
-				return (current->num);
-			//fprintf(stderr, "end check elem content\n");
-			//fprintf(stderr, "end check elem\n");
-			//fprintf(stderr, "check next elem\n");
-			ptr = ptr->next;
-		}
-		class_lst = class_lst->next;
-	}
-	//fprintf(stderr, "end %d, %d\n", x, y);
-	return (0);
-}
-
-t_class	*makeset(int n, t_elem *singleton)
-{
-	t_class	*new;
-
-	new = malloc(sizeof(t_class));
-	if (!new)
-		return (NULL);
-	new->num = n;
-	new->elem = ft_lstnew(singleton);
-	if (!new->elem)
-	{
-		free(singleton);
-		return (NULL);
-	}
-	return (new);
-}
-
-t_elem	*new_elem(int x, int y)
-{
-	t_elem	*new;
-
-	new = malloc(sizeof(t_elem));
-	if (!new)
-		return (NULL);
-	new->x = x;
-	new->y = y;
-	return (new);
-}
-
-char	**mazer_init(int lg, int ht, t_list **lst)
+static char	**mazer_init(int lg, int ht, t_list **lst)
 {
 	char	**maze;
 	int		x;
@@ -199,21 +69,7 @@ char	**mazer_init(int lg, int ht, t_list **lst)
 	return (maze);
 }
 
-void	aff_class(t_class *class)
-{
-	t_list	*ptr;
-	t_elem	*e;
-
-	ptr = class->elem;
-	while (ptr)
-	{
-		e = ptr->content;
-		fprintf(stderr, "class num %d | singleton {%d,%d} \n", class->num, e->x, e->y);
-		ptr = ptr->next;
-	}
-}
-
-int	set_random(t_pos *pos, int e_lg, int e_ht, int seed)
+static int	set_random(t_pos *pos, int e_lg, int e_ht, int seed)
 {
 	int lg;
 	int ht;
@@ -233,35 +89,7 @@ int	set_random(t_pos *pos, int e_lg, int e_ht, int seed)
 	return (seed);
 }
 
-t_class	*search_class(int n, t_list *class)
-{
-	t_class	*current;
-
-	while (class)
-	{
-		current = class->content;
-		if (current->num == n)
-			return (current);
-		class = class->next;
-	}
-	return (NULL);
-}
-
-t_list	*search_lst(int n, t_list *class)
-{
-	t_class	*current;
-
-	while (class)
-	{
-		current = class->content;
-		if (current->num == n)
-			return (class);
-		class = class->next;
-	}
-	return (NULL);	
-}
-
-void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
+static void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 {
 	int		a;
 	int		b;
@@ -290,7 +118,7 @@ void	moove(t_pos *bal, char **maze, int dx, int dy, t_list **class)
 	}
 }
 
-int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg)
+static int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg)
 {
 	int		range = 0;
 	int		rand;
@@ -324,7 +152,7 @@ int	rand_moove(t_pos *bal, int seed, t_list **class, char **maze, int ht, int lg
 	return (seed / range);
 }
 
-char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
+char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 {
 	char			**maze;
 	t_list			*lst_class;
@@ -340,8 +168,8 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	
 	lst_class = NULL;
 	seed = reset_seed();
-	*lg = (seed % 51) + 50;
-	*ht = ((seed << 1) % 51) + 50;
+	*lg = (seed % 20) + 10;
+	*ht = ((seed << 1) % 20) + 10;
 	if (*lg % 2 == 0)
 		*lg += 1;
 	if (*ht % 2 == 0)
@@ -363,7 +191,7 @@ char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 		seed = rand_moove(&baladeur_p, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_o, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_rand2, seed, &lst_class, maze, *ht, *lg);
-		//usleep(10000);
+		//usleep(2500);
 		//aff_maze_debug(maze);
 	}
 	maze[perso->y][perso->x] = 'E';

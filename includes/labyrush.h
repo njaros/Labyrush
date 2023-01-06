@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:47:25 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 10:44:23 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 12:13:19 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,18 @@ int		ask_if_is_bot();
 int		aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log);
 int		keskiladi(char **maze, char *lecture, t_pos *pers, int *timer, int *victoire, int *rip, char **msg, time_handler *th, long astar_timer);
 int		a_star(char **map, int row, int col, int xa, int ya, int xb, int yb);
+
+// Fonctions pour générateur de labyrhinte
+
+char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif);
 char	**mazer(int *lg, int *ht, t_pos *perso, t_pos *objectif);
+int		reset_seed(void);
+void	clean_lst(t_list *lst);
+void	unir(t_class *a, t_list *b, t_list **first);
+int		find(t_list *class_lst, int x, int y);
+t_class	*makeset(int n, t_elem *singleton);
+t_elem	*new_elem(int x, int y);
+t_list	*search_lst(int n, t_list *class);
+t_class	*search_class(int n, t_list *class);
 
 #endif
