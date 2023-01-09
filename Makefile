@@ -45,6 +45,9 @@ INCLUDES =	$(addprefix ${PATH_INCLUDES}/,${LST_INCLUDES})
 
 all :				Makefile ${LIB} ${NAME}
 
+solver :			src/solver.cpp
+					c++ -Wall -Wextra -Werror src/solver.cpp -o solver
+
 ${NAME} :			${OBJS}
 					${CC} ${FLAGS} ${OBJS} ${LIB} -pthread -o $@
 

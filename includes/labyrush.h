@@ -61,6 +61,7 @@ typedef struct noeud
 
 typedef struct time_handler
 {
+	FILE 			*log;
 	struct timeval	*t;
 	long			timeout;
 	pthread_mutex_t	mut;

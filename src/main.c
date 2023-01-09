@@ -141,7 +141,7 @@ void	*timeout_handler(void *arg)
 		pthread_mutex_lock(&(tps->mut));
 		if (us(*(tps->t), current) > tps->timeout)
 		{
-			printf("\ntimeout...\n\n --DEFAITE-- \n\n");
+			fprintf(tps->log, "\ntimeout...\n\n --DEFAITE-- \n\n");
 			exit(0);
 		}
 		pthread_mutex_unlock(&(tps->mut));
@@ -199,7 +199,7 @@ int	main(int ac, char **av)
 	is_bot = ask_if_is_bot();
 	
 	FILE *fd_log = fopen("result.log", "w");
-
+	th.log = fd_log;
 	ft_printf("width = %d high = %d begin_x = %d begin_y = %d\n", lg, ht, perso.x, perso.y);
 	fprintf(fd_log, "width = %d high = %d begin_x = %d begin_y = %d\n", lg, ht, perso.x, perso.y);
 	
@@ -222,7 +222,7 @@ int	main(int ac, char **av)
 		begin.tv_sec = last_input.tv_sec;
 		begin.tv_usec = last_input.tv_usec;
 		th.t = &last_input;
-		th.timeout = 1000;
+		th.timeout = 20000;
 		if (pthread_mutex_init(&(th.mut), NULL))
 		{
 			fprintf(stderr, "mutex init fail\n");
@@ -242,7 +242,7 @@ int	main(int ac, char **av)
 			pthread_mutex_lock(&(th.mut));
 			gettimeofday(&last_input, NULL);
 			if (th.timeout == astar_time)
-				th.timeout = 1000;
+				th.timeout = 20000;
 			pthread_mutex_unlock(&(th.mut));
 		}
 		fprintf(fd_log, "\nsolver said : %s\n", lecture);

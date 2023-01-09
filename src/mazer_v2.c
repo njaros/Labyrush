@@ -168,8 +168,8 @@ char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 	
 	lst_class = NULL;
 	seed = reset_seed();
-	*lg = (seed % 20) + 50;
-	*ht = ((seed << 1) % 20) + 50;
+	*lg = (seed % 20) + 30;
+	*ht = ((seed << 1) % 20) + 30;
 	if (*lg % 2 == 0)
 		*lg += 1;
 	if (*ht % 2 == 0)
