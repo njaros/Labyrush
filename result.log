@@ -1,96 +1,2255 @@
-width = 41 high = 31 begin_x = 39 begin_y = 11
-timer until O (goal) reached = 38
+width = 59 high = 69 begin_x = 19 begin_y = 19
+timer until O (goal) reached = 108
 
 Current vision : 
 
-...##
-...##
-..P##
-...##
-..###
-
-solver said : UP
-
-Current vision : 
-
-...##
-...##
-..P##
-..E##
-...##
-
-solver said : UP
-
-Current vision : 
-
-...##
-...##
-..P##
-...##
-..E##
+.#.#.
+##.##
+.#P..
+####.
+.#.#.
 
 solver said : UP
 
 Current vision : 
 
 #####
-...##
-..P##
-...##
-...##
+.#.#.
+##P##
+.#E..
+####.
 
 solver said : UP
 
 Current vision : 
 
-..###
+.#.#.
 #####
-..P##
-...##
-...##
+.#P#.
+##.##
+.#E..
+
+solver said : DOWN
+
+Current vision : 
+
+#####
+.#.#.
+##P##
+.#E..
+####.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+##.##
+.#P..
+####.
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#.#
+#.###
+#EP.#
+###.#
+#.#..
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.###.
+E.P#.
+##.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+.###.
+E..#.
+##P#.
+.#...
+##.##
+
+solver said : DOWN
+
+Current vision : 
+
+E..#.
+##.#.
+.#P..
+##.##
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+##.#.
+.#...
+##P##
+.#...
+#####
+
+solver said : DOWN
+
+Current vision : 
+
+.#...
+##.##
+.#P..
+#####
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+#....
+#.###
+#.P..
+#####
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.###.
+..P..
+####.
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+###.#
+..P.#
+###.#
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+##.##
+..P#.
+##.#.
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+##.##
+...#.
+##P#.
+.#.#.
+##.##
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+##.#.
+.#P#.
+##.##
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+##.#.
+.#.#.
+##P##
+...#.
+#####
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+##.##
+..P#.
+#####
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#.#.#
+###.#
+#.P.#
+#####
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+####.
+.#P..
+#####
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#.#
+###.#
+#.P.#
+#####
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+##.##
+..P#.
+#####
+.#.#.
 
 solver said : UP
 
+Current vision : 
 
+##.#.
+.#.#.
+##P##
+...#.
+#####
 
- -----------BILAN---------- 
+solver said : UP
 
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🔲🔲🔲🔲🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🏰🔲🔲🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🏰🏰🏰🏰🏰🏰🔲🏰🏰🏰🔲🔲🔲🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🥧🔲🏰🏰🏰🏰🏰🔲🏰🏰🏰🏰🏰🏰🔲🏰🏰💥🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🏰🏰🏰🔲🔲🏰🏰🏰🏰🔲🏰🔲🔲🚙🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🏰🔲🏰🔲🔲🏰🏰🏰🔲🔲🔲🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🏰🔲🔲🏰🔲🔲🏰🏰🏰🔲🔲🔲🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🔲🔲🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🔲🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🍽🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🏰🔲🔲🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🏰🏰🏰🏰🏰🔲🏰🏰🏰🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🏰🏰🔲🔲🏰🔲🔲🔲🔲🏰🏰🏰🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🏰🏰🔲🔲🔲🔲🏰🏰🔲🏰🏰🏰🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🏰🏰🏰🏰🏰🔲🔲🏰🔲🔲🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🏰🏰🔲🔲🔲🔲🔲🔲🔲🔲🔲🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🔲🔲🔲🔲🔲🔲🏰🔲🔲🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🔲🔲🔲🔲🔲🔲🏰🏰🔲🔲🔲🔲🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🏰🏰🏰🏰🏰🔲🔲🏰🔲🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🔲🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
-🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰🏰
+Current vision : 
 
+...#.
+##.#.
+.#P#.
+##.##
+...#.
 
-On est pas dans Wolfenstein 3D !
+solver said : UP
 
+Current vision : 
 
---DEFAITE-- 
+##.##
+...#.
+##P#.
+.#.#.
+##.##
 
- 5 mouvements
+solver said : UP
+
+Current vision : 
+
+.....
+##.##
+..P#.
+##.#.
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.....
+##P##
+...#.
+##.#.
+
+solver said : UP
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+##.##
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P..
+#.###
+..#..
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.#.#.
+..P..
+.###.
+.#...
+
+solver said : UP
+
+Current vision : 
+
+#####
+.#.#.
+.#P#.
+.....
+.###.
+
+solver said : UP
+
+Current vision : 
+
+.....
+#####
+.#P#.
+.#.#.
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+#####
+.#.#.
+.#P#.
+.....
+.###.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.#.#.
+..P..
+.###.
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P..
+#.###
+..#..
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+##.##
+...#.
+
+solver said : UP
+
+Current vision : 
+
+.####
+...#.
+.#P#.
+.....
+##.##
+
+solver said : UP
+
+Current vision : 
+
+.#...
+.####
+..P#.
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+#.#..
+#.###
+#.P.#
+#.#.#
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+##.##
+.#P..
+.#.#.
+.....
+
+solver said : UP
+
+Current vision : 
+
+####.
+.#.#.
+##P##
+.#...
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+####.
+.#P#.
+##.##
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+####.
+.#.#.
+##P##
+.#...
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+##.##
+.#P..
+.#.#.
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#..
+#.###
+#.P.#
+#.#.#
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+.#...
+.####
+..P#.
+.#.#.
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+.####
+...#.
+.#P#.
+.....
+##.##
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+##.##
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P..
+#.###
+..#..
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.#.#.
+..P..
+.###.
+.#...
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#..
+#.#.#
+..P.#
+###.#
+#....
+
+solver said : RIGHT
+
+Current vision : 
+
+.#...
+.#.##
+..P#.
+##.#.
+.....
+
+solver said : UP
+
+Current vision : 
+
+####.
+.#...
+.#P##
+...#.
+##.#.
+
+solver said : UP
+
+Current vision : 
+
+.....
+####.
+.#P..
+.#.##
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+####.
+.#...
+.#P##
+...#.
+##.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#...
+.#.##
+..P#.
+##.#.
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+.#.##
+...#.
+##P#.
+.....
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+##.#.
+..P..
+.#.#.
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+....#
+###.#
+#.P..
+#.#.#
+#.#..
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.###.
+.#P..
+.#.#.
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.###.
+.#...
+.#P#.
+.#.#.
+.####
+
+solver said : DOWN
+
+Current vision : 
+
+.#...
+.#.#.
+.#P#.
+.####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.###.
+.#...
+.#P#.
+.#.#.
+.####
+
+solver said : UP
+
+Current vision : 
+
+.....
+.###.
+.#P..
+.#.#.
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+....#
+###.#
+#.P..
+#.#.#
+#.#..
+
+solver said : RIGHT
+
+Current vision : 
+
+...#.
+##.#.
+..P..
+.#.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+##.#.
+.....
+.#P#.
+.#...
+####.
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+.#.#.
+.#P..
+####.
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+#.#.#
+#.P.#
+###.#
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.#.
+..P#.
+##.##
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.##
+.....
+.#P#.
+...#.
+##.##
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.#.##
+..P..
+.#.#.
+...#.
+
+solver said : UP
+
+Current vision : 
+
+.####
+.#.#.
+.#P##
+.....
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+...#.
+.####
+.#P#.
+.#.##
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+.####
+.#.#.
+.#P##
+.....
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.#.##
+..P..
+.#.#.
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.##
+.....
+.#P#.
+...#.
+##.##
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+.#.#.
+..P#.
+##.##
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+...#.
+##P##
+.#.#.
+#####
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+##.##
+.#P#.
+#####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+...#.
+##P##
+.#.#.
+#####
+
+solver said : UP
+
+Current vision : 
+
+.....
+.#.#.
+..P#.
+##.##
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.##
+.....
+.#P#.
+...#.
+##.##
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.#.##
+..P..
+.#.#.
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#.#
+#.###
+..P.#
+#.#.#
+..#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.####
+..P#.
+.#.##
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.####
+...#.
+.#P##
+.#.#.
+.####
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+.#.##
+.#P#.
+.####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.####
+...#.
+.#P##
+.#.#.
+.####
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.####
+..P#.
+.#.##
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#.#.#
+#.###
+..P.#
+#.#.#
+..#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+.#.##
+..P..
+.#.#.
+...#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P..
+#.#.#
+#...#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+##.#.
+..P..
+.#.#.
+.#...
+
+solver said : UP
+
+Current vision : 
+
+.#.##
+...#.
+##P#.
+.....
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#...
+.#.##
+..P#.
+##.#.
+.....
+
+solver said : UP
+
+Current vision : 
+
+####.
+.#...
+.#P##
+...#.
+##.#.
+
+solver said : UP
+
+Current vision : 
+
+.....
+####.
+.#P..
+.#.##
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+....#
+###.#
+#.P.#
+#.###
+..#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+...#.
+##.##
+..P#.
+.####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+#####
+...#.
+##P##
+...#.
+.####
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+#####
+..P#.
+##.##
+...#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#.#
+#####
+..P.#
+###.#
+#...#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+.####
+..P..
+####.
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+#...#
+#.###
+..P..
+#####
+#.#..
+
+solver said : LEFT
+
+Current vision : 
+
+.#...
+.#.##
+..P..
+#####
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#.#..
+#.#.#
+#.P..
+#####
+..#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+##.#.
+.#P..
+.####
+...#.
+
+solver said : UP
+
+Current vision : 
+
+##.#.
+.#.#.
+##P#.
+.#...
+.####
+
+solver said : UP
+
+Current vision : 
+
+.....
+##.#.
+.#P#.
+##.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+##.#.
+.#.#.
+##P#.
+.#...
+.####
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+##.#.
+.#P..
+.####
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+#.#..
+#.#.#
+#.P..
+#####
+..#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.#...
+.#.##
+..P..
+#####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.#...
+.#P##
+.....
+#####
+
+solver said : UP
+
+Current vision : 
+
+...#.
+.#.#.
+.#P..
+.#.##
+.....
+
+solver said : UP
+
+Current vision : 
+
+##.#.
+...#.
+.#P#.
+.#...
+.#.##
+
+solver said : UP
+
+Current vision : 
+
+...#.
+##.#.
+..P#.
+.#.#.
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+....#
+###.#
+..P.#
+#.#.#
+#.#..
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.###.
+..P..
+##.#.
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#....
+#.###
+#.P..
+###.#
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#...
+##.##
+.#P..
+####.
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+####.
+.#...
+##P##
+.#...
+####.
+
+solver said : UP
+
+Current vision : 
+
+.#...
+####.
+.#P..
+##.##
+.#...
+
+solver said : RIGHT
+
+Current vision : 
+
+#....
+###.#
+#.P..
+#.###
+#....
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+##.#.
+..P..
+.###.
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+#.#.#
+..P.#
+###.#
+....#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.#.
+..P#.
+##.#.
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+...#.
+##P#.
+...#.
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+##.#.
+..P#.
+.#.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+##.#.
+...#.
+.#P#.
+.#...
+.#.##
+
+solver said : DOWN
+
+Current vision : 
+
+...#.
+.#.#.
+.#P..
+.#.##
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+..#.#
+#.#.#
+#.P.#
+#.###
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.#.##
+..P#.
+.####
+.....
+
+solver said : UP
+
+Current vision : 
+
+.#.##
+.#.#.
+.#P##
+...#.
+.####
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.#.##
+.#P#.
+.#.##
+...#.
+
+solver said : UP
+
+Current vision : 
+
+.#.##
+.#.#.
+.#P##
+.#.#.
+.#.##
+
+solver said : UP
+
+Current vision : 
+
+.....
+.#.##
+.#P#.
+.#.##
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.....
+.#P##
+.#.#.
+.#.##
+
+solver said : UP
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+.#.##
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P.#
+#.###
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.#.#.
+.#.##
+..P#.
+.####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.###.
+.#.#.
+.#P##
+...#.
+.####
+
+solver said : UP
+
+Current vision : 
+
+.....
+.###.
+.#P#.
+.#.##
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+.###.
+.#.#.
+.#P##
+...#.
+.####
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.#.##
+..P#.
+.####
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#.#
+#.#.#
+..P.#
+#.###
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+.#.##
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+....#
+#.#.#
+..P..
+#.#.#
+..#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.#.
+...#.
+
+solver said : UP
+
+Current vision : 
+
+##.#.
+.....
+.#P#.
+.....
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#...
+##.#.
+..P..
+.#.#.
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+#....
+#.#.#
+..P.#
+#.#.#
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.##
+..P#.
+.#.#.
+.....
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.....
+.#P##
+...#.
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.##
+...#.
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+#.#.#
+..P..
+#.###
+..#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.###.
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+#.#.#
+..P..
+###.#
+#.#..
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+##.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.....
+##P#.
+.#...
+.####
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+##.#.
+.#P..
+.####
+.#.#.
+
+solver said : RIGHT
+
+Current vision : 
+
+....#
+#.#.#
+#.P.#
+#####
+#.#.#
+
+solver said : RIGHT
+
+Current vision : 
+
+...#.
+.#.##
+..P#.
+#####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+...#.
+.#P##
+...#.
+#####
+
+solver said : UP
+
+Current vision : 
+
+.....
+.#.#.
+..P#.
+.#.##
+...#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.....
+.#P#.
+...#.
+.#.##
+
+solver said : UP
+
+Current vision : 
+
+.#...
+.#.#.
+..P..
+.#.#.
+...#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#..
+#.#.#
+..P..
+#.#.#
+....#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+.#.#.
+..P..
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+....#
+#.#.#
+..P..
+#.#.#
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+#.#.#
+..P..
+#.#.#
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+#.#.#
+#.P..
+#.#.#
+#....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+.#.#.
+.#P..
+.#.#.
+.#...
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.#...
+.#P#.
+.#...
+##.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#...
+.#.#.
+.#P..
+##.#.
+.....
+
+solver said : RIGHT
+
+Current vision : 
+
+#....
+#.#.#
+#.P..
+#.#.#
+....#
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.##
+...#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.....
+.#P#.
+.....
+.#.##
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+.#.#.
+..P..
+.#.##
+...#.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+.....
+.#P##
+...#.
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+.#.##
+..P#.
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+#....
+#.#.#
+..P.#
+#.#.#
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.#...
+##.#.
+..P..
+.#.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+#.#..
+###.#
+..P..
+#.#.#
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+.###.
+..P..
+##.#.
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+.###.
+.....
+##P#.
+.....
+##.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+##.#.
+..P..
+##.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+###.#
+#.P..
+###.#
+#....
+
+solver said : LEFT
+
+Current vision : 
+
+.....
+####.
+.#P..
+####.
+.#...
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+###.#
+#.P..
+###.#
+#....
+
+solver said : RIGHT
+
+Current vision : 
+
+.....
+##.#.
+..P..
+##.#.
+.....
+
+solver said : UP
+
+Current vision : 
+
+.###.
+.....
+##P#.
+.....
+##.#.
+
+solver said : UP
+
+Current vision : 
+
+.#.#.
+.###.
+..P..
+##.#.
+.....
+
+solver said : LEFT
+
+Current vision : 
+
+#.#.#
+#.###
+..P..
+###.#
+#....
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+##.##
+..P..
+####.
+.#...
+
+solver said : UP
+
+Current vision : 
+
+####.
+.#.#.
+##P##
+.....
+####.
+
+solver said : UP
+
+Current vision : 
+
+.....
+####.
+.#P#.
+##.##
+.....
+
+solver said : DOWN
+
+Current vision : 
+
+####.
+.#.#.
+##P##
+.....
+####.
+
+solver said : DOWN
+
+Current vision : 
+
+.#.#.
+##.##
+..P..
+####.
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+#.#.#
+###.#
+..P..
+#####
+#.#..
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+.###.
+..P..
+#####
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#.#
+#.###
+#.P..
+#####
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+##.##
+.#P..
+#####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+#####
+...#.
+##P##
+.#...
+#####
+
+solver said : UP
+
+Current vision : 
+
+.....
+#####
+..P#.
+##.##
+.#...
+
+solver said : LEFT
+
+Current vision : 
+
+#....
+#####
+..P.#
+###.#
+#.#..
+
+solver said : LEFT
+
+Current vision : 
+
+.#...
+#####
+..P..
+####.
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+..#..
+#####
+..P..
+#####
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+...#.
+#####
+..P..
+.####
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#...#
+#####
+..P..
+#.###
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#...
+.####
+..P..
+##.##
+.#.#.
+
+solver said : DOWN
+
+Current vision : 
+
+.####
+.....
+##P##
+.#.#.
+#####
+
+solver said : DOWN
+
+Current vision : 
+
+.....
+##.##
+.#P#.
+#####
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+.####
+.....
+##P##
+.#.#.
+#####
+
+solver said : UP
+
+Current vision : 
+
+.#...
+.####
+..P..
+##.##
+.#.#.
+
+solver said : LEFT
+
+Current vision : 
+
+#.#..
+#.###
+#.P..
+###.#
+#.#.#
+
+solver said : LEFT
+
+Current vision : 
+
+.#.#.
+##.##
+.#P..
+####.
+.#.#.
+
+solver said : UP
+
+Current vision : 
+
+##.##
+.#.#.
+##P##
+.#...
+####.
+
+solver said : UP
+
+Current vision : 
+
+.....
+##.##
+.#P#.
+##.##
+.#...
+
+solver said : UP
+
+Current vision : 
+
+#####
+.....
+##P##
+.#.#.
+##.##
+
+solver said : UP
+
+Current vision : 
+
+#####
+#####
+..P..
+##.##
+.#.#.
+
+timeout...
+
+ --DEFAITE-- 
+

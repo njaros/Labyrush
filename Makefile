@@ -14,7 +14,7 @@
 
 NAME = labyrush
 CC = gcc
-FLAGS = -Werror -Wextra -Wall
+FLAGS = -Wall -Wextra -Wall
 
 ## LES CHEMINS ##
 

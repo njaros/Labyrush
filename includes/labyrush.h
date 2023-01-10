@@ -23,6 +23,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <pthread.h>
+# include <errno.h>
+# include <string.h>
 
 // La structure ci-dessous aide un peu à la lisibilité du programme
 

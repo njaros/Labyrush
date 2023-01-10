@@ -41,9 +41,11 @@ void	freeteuse(void *to_free)
 int	aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log)
 {
 	char	**vision;
+	char	toSend[31];
 	int		x;
 	int		y;
 
+	ft_bzero(toSend, 31);
 	y = 0;
 	vision = malloc(sizeof(char *) * 6);
 	vision[5] = NULL;
@@ -80,10 +82,16 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log)
 	fprintf(fd_log, "Current vision : \n\n");
 	while (++y < 5)
 	{
-		ft_printf("%s\n", vision[y]);
+		strcat(toSend, vision[y]);
+		strcat(toSend, "\n");
 		fprintf(fd_log, "%s\n", vision[y]);
 		free(vision[y]);
 	}
+	if (write(1, toSend, 30) != 30)
+	{
+		fprintf(stderr, "buuuuuuug\n");
+	}
+	fprintf(stderr, "subject : \n%s", toSend);
 	free(vision);
 	return (1);
 }

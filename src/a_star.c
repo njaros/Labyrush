@@ -176,7 +176,7 @@ int	a_star(char **map, int row, int col, int xa, int ya, int xb, int yb)
 	noeud	*depart;
 	noeud	*current;
 
-	heuristiques = malloc(sizeof(int *) * row + 1);
+	heuristiques = malloc(sizeof(int *) * (row + 1));
 	heuristiques[row] = NULL;
 	open = NULL;
 	closed = NULL;

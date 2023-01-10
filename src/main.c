@@ -142,6 +142,7 @@ void	*timeout_handler(void *arg)
 		if (us(*(tps->t), current) > tps->timeout)
 		{
 			fprintf(tps->log, "\ntimeout...\n\n --DEFAITE-- \n\n");
+			fprintf(stderr, "\ntimeout...\n\n --DEFAITE-- \n\n");
 			exit(0);
 		}
 		pthread_mutex_unlock(&(tps->mut));
@@ -222,7 +223,7 @@ int	main(int ac, char **av)
 		begin.tv_sec = last_input.tv_sec;
 		begin.tv_usec = last_input.tv_usec;
 		th.t = &last_input;
-		th.timeout = 20000;
+		th.timeout = 1000000;
 		if (pthread_mutex_init(&(th.mut), NULL))
 		{
 			fprintf(stderr, "mutex init fail\n");
@@ -236,18 +237,25 @@ int	main(int ac, char **av)
 		ft_bzero(lecture, 50);
 		if (!aff_vue_perso(maze, perso, lg, ht, fd_log))
 			return (err(2, maze));
-		read(0, lecture, 50);
+		int	err_read = read(0, lecture, 50);
+		while (!err_read)
+			err_read = read(0, lecture, 50);
+		if (err_read == -1) {
+			fprintf(fd_log, "read crash: %d : %s\n", errno, strerror(errno));
+			//fprintf(stderr, "read crash: %d : %s\n", errno, strerror(errno));
+		}
 		if (is_bot)
 		{
 			pthread_mutex_lock(&(th.mut));
 			gettimeofday(&last_input, NULL);
 			if (th.timeout == astar_time)
-				th.timeout = 20000;
+				th.timeout = 1000000;
 			pthread_mutex_unlock(&(th.mut));
 		}
 		fprintf(fd_log, "\nsolver said : %s\n", lecture);
+		//fprintf(stderr, "\nsolver said : %s\n", lecture);
 		compteur += keskiladi(maze, lecture, &perso, &timer, &victoire, &rip, &lulz_msg, &th, astar_time);
-		if (compteur > 1000)
+		if (compteur > 10000)
 			rip = 1;
 	}
 
@@ -274,7 +282,9 @@ int	main(int ac, char **av)
 	}
 	if (lulz_msg)
 		free(lulz_msg);
-	pthread_cancel(timeout);
-	pthread_detach(timeout);
+	if (is_bot) {
+		pthread_cancel(timeout);
+		pthread_detach(timeout);
+	}
 	return (0);
 }

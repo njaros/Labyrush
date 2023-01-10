@@ -24,7 +24,7 @@ static char	**mazer_init(int lg, int ht, t_list **lst)
 
 	i = 0;
 	//fprintf(stderr, "%d | %d\n", lg, ht);
-	maze = malloc(sizeof(char *) * ht + 1);
+	maze = malloc(sizeof(char *) * (ht + 1));
 	maze[ht] = NULL;
 	if (!maze)
 		return (NULL);
