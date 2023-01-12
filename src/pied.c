@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:05:49 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 08:59:03 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/12 08:35:26 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	aff_vue_perso(char **maze, t_pos p, int lg, int ht, FILE *fd_log)
 	{
 		fprintf(stderr, "buuuuuuug\n");
 	}
-	fprintf(stderr, "subject : \n%s", toSend);
+	//fprintf(stderr, "subject : \n%s", toSend);
 	free(vision);
 	return (1);
 }

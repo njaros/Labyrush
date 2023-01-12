@@ -6,7 +6,7 @@
 /*   By: njaros <njaros@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:49:26 by njaros            #+#    #+#             */
-/*   Updated: 2023/01/06 12:09:28 by njaros           ###   ########lyon.fr   */
+/*   Updated: 2023/01/12 10:38:17 by njaros           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ int	main(int ac, char **av)
 
 	gettimeofday(&last_input, NULL);
 
-	astar_time = us(begin, last_input) * 2;
+	astar_time = us(begin, last_input) * 2 + 1000000;
 	
 	fprintf(stderr, "a star done in time : %ld usec \n", us(begin, last_input));
 
@@ -268,7 +268,7 @@ int	main(int ac, char **av)
 		ft_printf("\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 		fprintf(fd_log, "\n\n--VICTOIRE--\n\n score : %d mouvements\n\n", compteur);
 		if (is_bot)
-			fprintf(fd_log, "time to resolve : %ld usecs\n\n", us(last_input, begin));
+			fprintf(fd_log, "time to resolve : %ld usecs\n\n", us(begin, last_input));
 	}
 	if (victoire == 2)
 	{

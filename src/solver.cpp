@@ -68,7 +68,179 @@ std::ostream &operator<<(std::ostream &o, const grid &g)
 		o << *cit << '\n';
 	return o;
 }
-// This is a C++ exemple solver
+
+int ManhattanNorm(const coord &a, const coord &b)
+{
+	return (abs(a.first - b.first) + abs(a.second - b.second));
+}
+
+std::ostream &operator<<(std::ostream &o, const std::pair<int, coord> &p)
+{
+	o << p.first << "->" << p.second;
+	return o;
+}
+
+class Node
+{
+
+	Node() : _value(0), _cost(0), _parent(0)
+	{}
+
+public :
+
+	coord				_pos;
+	int					_value;
+	int 				_cost;
+	Node				*_parent;
+
+	Node(coord pos, Node *parent, coord goal) : _pos(pos), _parent(parent)
+	{
+		if (parent)
+			_cost = parent->_cost + 1;
+		else
+			_cost = 0;
+		_value = _cost + ManhattanNorm(_pos, goal);
+	}
+	Node(coord pos, Node *parent, int heuristicValue) : _pos(pos), _parent(parent)
+	{
+		if (parent)
+			_cost = parent->_cost + 1;
+		else
+			_cost = 0;
+		_value = _cost + heuristicValue;
+	}
+	Node(const Node &other) : _pos(other._pos), _value(other._value), _cost(other._cost), _parent(other._parent)
+	{}
+	~Node() {}
+	Node &operator=(const Node &other)
+	{
+		_pos = other._pos;
+		_value = other._value;
+		_cost = other._cost;
+		_parent = other._parent;
+		return (*this);
+	}
+};
+
+typedef std::multimap<int, Node*>				openType;
+typedef std::map<std::pair<int, int>, Node*>	closeType;
+
+
+class AStar
+{
+	//Coplien not to use
+	AStar() {}
+	AStar(const AStar &other) {(void) other;}
+	AStar &operator&(const AStar &other) {(void) other; return *this;}
+	//End of Coplien not to use
+
+	//Member's data
+	openType								_open;
+	closeType 								_close;
+	std::set<coord>							_secureFreeTool;
+	std::set<coord>                         _zone;
+	coord									_start;
+	coord									_end;
+	bool									_endReached;
+	Node									*_startNode;
+	Node									*_current;
+
+	//Private tool functions
+
+	void _checkSide(const coord &move)
+	{
+		coord	newCoord = _current->_pos + move;
+		std::set<coord>::const_iterator  zoneIt = _zone.find(newCoord);
+		int newVal = ManhattanNorm(_end, newCoord);
+		if (zoneIt != _zone.end()) // check if I'm out of border
+		{
+			closeType::iterator	found = _close.find(_current->_pos);
+			if (found != _close.end())
+			{
+				if (found->second->_value > newVal + 1 + _current->_cost)
+				{
+					Node	*newNode = new Node(newCoord, _current, newVal);
+					_open.insert(std::make_pair(newNode->_value, newNode));
+					_close.erase(found);
+				}
+			}
+			else
+			{
+				Node	*newNode = new Node(_current->_pos + move, _current, newVal);
+				_open.insert(std::make_pair(newNode->_value, newNode));
+			}
+		}
+	}
+
+public :
+
+	AStar(const std::set<coord> &zone, const coord &start, const coord &end) :	_zone(zone), _start(start), _end(end),
+																				_endReached(false)
+	{
+		_startNode = new Node(_start, NULL, end);
+		_open.insert(std::make_pair(_startNode->_value, _startNode));
+		_current = _open.begin()->second;
+		while (!_open.empty() && !_endReached)
+		{
+			_checkSide(std::make_pair(-1, 0));	//LEFT
+			_checkSide(std::make_pair(0, -1));	//UP
+			_checkSide(std::make_pair(0, 1));	//DOWN
+			_checkSide(std::make_pair(1, 0));	//RIGHT
+			std::pair<closeType::iterator, bool> res = _close.insert(std::make_pair(_open.begin()->second->_pos, _open.begin()->second));
+			(void) res;
+			_open.erase(_open.begin());
+			if (!ManhattanNorm(_current->_pos, end))
+				_endReached = true;
+			if (!_open.empty() && !_endReached)
+				_current = _open.begin()->second;
+		}
+	}
+
+	~AStar ()
+	{
+		for (openType::iterator it = _open.begin(); it != _open.end(); ++it)
+		{
+			_secureFreeTool.insert(it->second->_pos);
+			delete (it->second);
+		}
+		for (closeType::iterator it = _close.begin(); it != _close.end(); ++it)
+		{
+			if (_secureFreeTool.find(it->first) == _secureFreeTool.end())
+				delete (it->second);
+		}
+	}
+
+	std::pair<int, coord> stepCount()	const
+	{
+		int 	stepCount = 0;
+		Node	*idx = _current;
+		Node    *nextMove;
+		if (!_endReached)
+			return std::make_pair(-1, coord(0, 0));
+		while (idx->_parent)
+		{
+			nextMove = idx;
+			idx = idx->_parent;
+			++stepCount;
+		}
+		return std::make_pair(stepCount, nextMove->_pos);
+	}
+
+	std::deque<coord>	getPath()	const
+	{
+		if (!_endReached)
+			return std::deque<coord>();
+		std::deque<coord>	path;
+		Node	*idx = _current;
+		while (idx != _startNode)
+		{
+			path.push_front(idx->_pos);
+			idx = idx->_parent;
+		}
+		return path;
+	}
+
+};
 
 class solver {
 
@@ -78,7 +250,9 @@ class solver {
 	coord				_pos;
 	coord				_start;
 	coord				_goal;
+	bool				_goalReached;
 	int					_timer;
+	std::set<coord>		_AStarData;
 	std::deque<coord>	_path;
 
 	void	_resetScore()
@@ -217,10 +391,11 @@ public :
 	solver(int width, int high, int x, int y, int timer) : _width(width), _high(high),
 														   _grid(high, row(width, std::make_pair('?', 0))),
 														   _pos(coord(x, y)), _start(_pos), _goal(coord(-1, -1)),
-														   _timer(timer) {}
+														   _goalReached(false), _timer(timer) {}
 
 	solver(const solver &o) : _width(o._width), _high(o._high), _grid(o._grid), _pos(o._pos), _start(o._start),
-							  _goal(o._goal), _timer(o._timer) {}
+							  _goal(o._goal), _goalReached(o._goalReached), _timer(o._timer), _AStarData(o._AStarData),
+							  _path(o._path) {}
 
 	~solver() {}
 
@@ -258,33 +433,49 @@ public :
 	bool getView() {
 		std::string line;
 		bool discovered = false;
-		for (int i = 0; i < 5; ++i) {
+		for (std::string::size_type i = 0; i < 5; ++i) {
 			getline(std::cin, line);
-			std::cerr << "solver" << line << '\n';
 			for (std::string::size_type idx = 0; idx < 5; ++idx) {
-				if (_pos.first + idx - 2 >= 0 && _pos.first + idx - 2 < _grid[0].size()) {
+				if (_pos.first + idx - 2 >= 0 && _pos.first + idx - 2 < _grid[0].size() && _pos.second + i - 2 >= 0 && _pos.second + i - 2 < _grid.size()) {
 					if (_grid[_pos.second + i - 2][_pos.first + idx - 2].first == '?') {
 						discovered = true;
+						if (line[idx] != '#')
+							_AStarData.insert(coord(_pos.first + idx - 2, _pos.second + i - 2));
 						if (line[idx] == 'P')
 							_grid[_pos.second + i - 2][_pos.first + idx - 2].first = '.';
 						else
+						{
+							if (line[idx] == 'O')
+								_goal = coord(_pos.first + idx - 2, _pos.second + i - 2);
 							_grid[_pos.second + i - 2][_pos.first + idx - 2].first = line[idx];
+						}
 					}
 				}
 			}
 		}
-		std::cerr << '\n';
 		return discovered;
 	}
 
 	void	setNewPath()
 	{
+		if (_goalReached)
+		{
+			AStar	aStart(_AStarData, _pos, _start);
+			_path = aStart.getPath();
+			return;
+		}
 		_path.clear();
 		std::set<coord>	visited;
 		changeScoreBfs();
 		coord	step = _pos;
 		while (_nextStep(step, visited))
 			;
+		if (_path.empty())
+		{
+			AStar	aStart(_AStarData, _pos, _goal);
+			_path = aStart.getPath();
+			_goalReached = true;
+		}
 	}
 
 	void	followPath()
@@ -345,14 +536,12 @@ int	main(void)
 	std::ostream out(&fb);
 
 	//First input asks if I'm a program or not (to define a timer or not)
-	while (line.empty())
-		getline(std::cin, line);
+	getline(std::cin, line);
 	std::cout << "y\n";
 
 	line.clear();
 	//Second input tells me the map size, and the coordinate of the beginning position
-	while (line.empty())
-		getline(std::cin, line);
+	getline(std::cin, line);
 	std::string::size_type	idx = line.find('=') + 1;
 	width = atoi(&line[idx]);
 	idx = line.find('=', idx) + 1;
@@ -364,8 +553,7 @@ int	main(void)
 
 	line.clear();
 	//Third input tells me the max movement I can do when I reached the O (goal) to bring it to the beginning posision
-	while (line.empty())
-		getline(std::cin, line);
+	getline(std::cin, line);
 	idx = line.find('=') + 1;
 	timer = atoi(&line[idx]);
 
