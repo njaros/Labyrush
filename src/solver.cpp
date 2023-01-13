@@ -436,7 +436,7 @@ public :
 		for (std::string::size_type i = 0; i < 5; ++i) {
 			getline(std::cin, line);
 			for (std::string::size_type idx = 0; idx < 5; ++idx) {
-				if (_pos.first + idx - 2 >= 0 && _pos.first + idx - 2 < _grid[0].size() && _pos.second + i - 2 >= 0 && _pos.second + i - 2 < _grid.size()) {
+				if (_pos.first + static_cast<int>(idx) - 2 >= 0 && _pos.first + idx - 2 < _grid[0].size() && _pos.second + static_cast<int>(i) - 2 >= 0 && _pos.second + i - 2 < _grid.size()) {
 					if (_grid[_pos.second + i - 2][_pos.first + idx - 2].first == '?') {
 						discovered = true;
 						if (line[idx] != '#')

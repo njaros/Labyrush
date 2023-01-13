@@ -191,8 +191,8 @@ char	**mazer2(int *lg, int *ht, t_pos *perso, t_pos *objectif)
 		seed = rand_moove(&baladeur_p, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_o, seed, &lst_class, maze, *ht, *lg);
 		seed = rand_moove(&baladeur_rand2, seed, &lst_class, maze, *ht, *lg);
-		//usleep(2500);
-		//aff_maze_debug(maze);
+		usleep(2500);
+		aff_maze_debug(maze);
 	}
 	maze[perso->y][perso->x] = 'E';
 	maze[objectif->y][objectif->x] = 'O';
