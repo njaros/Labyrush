@@ -25,7 +25,7 @@ PATH_INCLUDES = includes
 ## LES CHEMINS DES LIBRAIRIES ##
 
 LIB = libft/libft.a
-
+PINGPONG = pingpong
 ## LES SOURCES, OBJETS et INCLUDES ##
 
 LST_SRCS =	main.c \
@@ -34,13 +34,15 @@ LST_SRCS =	main.c \
 			mazer_v2.c \
 			keskiladi.c \
 			pied.c
+
 LST_OBJS = ${LST_SRCS:.c=.o}
+
 LST_INCLUDES =	labyrush.h \
 				libft.h
+
 SRC =		$(addprefix ${PATH_SRCS}/,${LST_SRCS})
 OBJS =		$(addprefix ${PATH_OBJS}/,${LST_OBJS})
 INCLUDES =	$(addprefix ${PATH_INCLUDES}/,${LST_INCLUDES})
-
 ## LES REGLES DE COMPILATION DU PROGRAMME ##
 
 all :				Makefile ${LIB} ${NAME}
@@ -48,7 +50,10 @@ all :				Makefile ${LIB} ${NAME}
 solver :			src/solver.cpp
 					c++ -Wall -Wextra -Werror src/solver.cpp -o solver
 
-${NAME} :			${OBJS}
+pingpong :
+					${PINGPONG}
+
+${NAME} :			${OBJS} ${PINGPONG}
 					${CC} ${FLAGS} ${OBJS} ${LIB} -pthread -o $@
 
 ${PATH_OBJS}/%.o:	${PATH_SRCS}/%.c ${INCLUDES} ${LIB} Makefile | ${PATH_OBJS}
@@ -57,10 +62,13 @@ ${PATH_OBJS}/%.o:	${PATH_SRCS}/%.c ${INCLUDES} ${LIB} Makefile | ${PATH_OBJS}
 ${PATH_OBJS}:
 					mkdir obj
 
-## LES REGLES DE COMPILATION DES LIBRAIRIES ##
+## APPELS D'AUTRES MAKEFILES ##
 
 ${LIB}:
 					make -C ./libft
+
+${PINGPONG} :		
+					make -C ./pingpong_dir
 
 ## LES REGLES DE SUPPRESSION ET RE ##
 
@@ -70,7 +78,7 @@ clean:
 
 fclean:				clean
 					make fclean -C ./libft
-					rm -f ${NAME}
+					rm -f ${NAME} pingpong solver result.log output.log
 
 re:					fclean all
 

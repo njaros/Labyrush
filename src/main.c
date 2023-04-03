@@ -182,6 +182,8 @@ int	main(int ac, char **av)
 	time_handler	th;
 	long			astar_time;
 
+	system("rm -f result.log");
+
 	if (ac == 1)
 		maze = choose_mazer(&lg, &ht, &perso, &objectif);
 	else
