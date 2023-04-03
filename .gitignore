@@ -4,3 +4,7 @@ labyrush
 libft.a
 test.c
 result.log
+pingpong
+solver
+pingping_dir/obj
+output.log
