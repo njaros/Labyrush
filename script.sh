@@ -1,1 +1,0 @@
-./labyrush && ./solver
