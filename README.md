@@ -14,7 +14,7 @@
 
 Ici est mon 1er sujet de rush.
 
-Ce programme génère ou récupère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advient.
+Ce programme génère ou récupère une carte 2D labyrinthique, retourne des données de la carte puis récupère des données de deplacement provenant d'un autre programme, et recommence jusqu'à ce qu'un scénario de fin advienne.
 Ce sujet est un pompage quasi complet d'un sujet de codingame.
 
 Ce programme crée ou récupère un labyrinthe avec un point E de départ, un point O d'objectif.
@@ -61,6 +61,6 @@ MP compte chaque instruction de PJ, permettant de comparer les algo entre eux.
 ### INTERET DU RUSH ###
 
 Les joueurs devront coder un algorithme de découverte de carte ainsi qu'un algorithme de plus court chemin "pathfinding".
-Pour le pathfinding, on peut orienter les joueurs sur un algo dijkstra ou a*, ce qui augmentera leur maîtrise des listes.
+Pour le pathfinding, on peut orienter les eleves sur un algo dijkstra ou a*.
 
 L'algorithme de découverte de carte sera celui qui déterminera le meilleur score (en cas de succès), donc ce n'est pas le plus simple !
